@@ -1,4 +1,4 @@
-# Siigo client
+# Siigo client API
 
 *By [srdorado](https://github.com/srdorado)*
 
