@@ -4,5 +4,5 @@ namespace Srdorado\SiigoClient;
 
 class Example
 {
-
+    private $attribute;
 }
