@@ -1,0 +1,31 @@
+{
+    "name": "srdorado/siigo-client-php",
+    "description": "Consumer client of the siigo api (https://siigoapi.docs.apiary.io/#)",
+    "keywords": ["siigo","api","php"],
+    "homepage": "https://github.com/srdorado/siigo-client-php",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Danie Eduardo Dordao P.",
+            "email": "doradodaniel14@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.19"
+    },
+    "autoload": {
+        "psr-4": {
+            "Srdorado\\SiigoClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ESrdorado\\SiigoClient\\Tests\\": "test/"
+        }
+    }
+}
