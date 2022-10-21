@@ -9,4 +9,11 @@ class ClientCustomer extends AbstractClient
     public function __construct()
     {
     }
+
+    public function getHeaders(array $params = []): array
+    {
+        $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
+        $headers['Authorization'] = $params['access_token'];
+        return $headers;
+    }
 }

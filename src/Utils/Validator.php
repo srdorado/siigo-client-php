@@ -55,6 +55,7 @@ class Validator
      */
     private function validateBodyRequest(EntityInterface $entity, array $rules)
     {
+        //TODO: add exception body
         $data = $entity->getData();
 
         $this->validateMatch($data, $rules);
@@ -121,8 +122,10 @@ class Validator
     {
         foreach ($rules as $rule) {
             $dataRule = explode(':', $rule);
-            $modelRule = $this->ruleFactory->create($dataRule[0]);
-            $modelRule->validate($dataRule[0], $value);
+            $ruleName = $dataRule[0];
+            $ruleConstraint = count($dataRule) > 1 ? $dataRule[1] : '';
+            $modelRule = $this->ruleFactory->create($ruleName);
+            $modelRule->validate($ruleConstraint, $value);
             unset($modelRule);
         }
     }

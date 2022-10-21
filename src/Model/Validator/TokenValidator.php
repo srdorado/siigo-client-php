@@ -38,7 +38,7 @@ class TokenValidator extends AbstractValidator
     {
         $rules = [];
 
-        if (\Srdorado\SiigoClient\Enum\EndPoint\Token::AUTH !== $endPoint) {
+        if (\Srdorado\SiigoClient\Enum\EndPoint\Token::AUTH === $endPoint) {
             $rules = \Srdorado\SiigoClient\Enum\Rule\Token::AUTH;
         }
 

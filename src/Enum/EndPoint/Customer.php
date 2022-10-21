@@ -9,4 +9,9 @@ class Customer
     public const GET_BY_ID = 'v1/customers/%s';
     public const UPDATE = 'v1/customers/%s';
     public const DELETE = 'v1/customers/%s';
+
+    public const HEADER_POST = [
+        'Content-Type' => 'application/json',
+        'Authorization' => ''
+    ];
 }

@@ -13,6 +13,22 @@ abstract class AbstractClient
     protected AbstractValidator $validator;
 
     /**
+     * @return string
+     */
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * @param string $baseUrl
+     */
+    public function setBaseUrl(string $baseUrl): void
+    {
+        $this->baseUrl = $baseUrl;
+    }
+
+    /**
      * @return \GuzzleHttp\Client
      */
     public function getClient(): \GuzzleHttp\Client
@@ -36,6 +52,20 @@ abstract class AbstractClient
     {
         return $this->baseUrl . $endPoint;
     }
+
+    /**
+     * @return void
+     */
+    protected function post(string $urlRequest, array $headers, string  $body): array
+    {
+        $request = new \GuzzleHttp\Psr7\Request('POST', $urlRequest, $headers, $body);
+        $result = $this->client->sendAsync($request)->wait();
+        return [
+            'code' => $result->getStatusCode(),
+            'contents' => (string)$result->getBody()
+        ];
+    }
+
 
     /**
      * @param array $params

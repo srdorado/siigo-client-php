@@ -27,12 +27,10 @@ class ClientToken extends AbstractClient
 
     private string $scope;
 
-    public function __construct(string $baseUrl = '', array $config = [], string $username = '', string $accessKey = '')
+    public function __construct(string $baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
-        $this->username = $username;
-        $this->accessKey = $accessKey;
-        $this->client = new \GuzzleHttp\Client($config);
+        $this->client = new \GuzzleHttp\Client();
         $this->validator = new TokenValidator();
     }
 
@@ -182,18 +180,14 @@ class ClientToken extends AbstractClient
 
         $body = $this->validator->getBody(\Srdorado\SiigoClient\Enum\EndPoint\Token::AUTH, $entity);
 
-        $header = $this->getHeaders();
+        $headers = $this->getHeaders();
 
-        $result = $this->client->post(
-            $this->getRequestUrl(\Srdorado\SiigoClient\Enum\EndPoint\Token::AUTH),
-            [
-                'headers' => json_decode($header),
-                'body' => json_decode($body)
-            ]
-        );
+        $urlRequest = $this->getRequestUrl(\Srdorado\SiigoClient\Enum\EndPoint\Token::AUTH);
 
-        if ($result->getStatusCode() === 200) {
-            $body = $result->getBody();
+        $result = $this->post($urlRequest, $headers, json_encode($body));
+
+        if ($result['code'] === 200) {
+            $body = json_decode($result['contents'], true);
             $this->accessToken = $body['access_token'];
             $this->expirationTime = $body['expires_in'];
             $this->tokenType = $body['token_type'];
