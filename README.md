@@ -2,6 +2,7 @@
 
 *By [srdorado](https://github.com/srdorado)*
 
+[![License](https://img.shields.io/packagist/l/srdorado/siigo-client-php)](https://packagist.org/packages/srdorado/siigo-client-php)
 ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/srdorado/siigo-client-php)
 [![Packagist Version](https://img.shields.io/packagist/v/srdorado/siigo-client-php)](https://packagist.org/packages/srdorado/siigo-client-php)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/srdorado/siigo-client-php)](https://packagist.org/packages/srdorado/siigo-client-php)
@@ -44,3 +45,7 @@ Lock your dependencies for production and test your code when upgrading.
 
 This bundle is under the MIT license. For the full copyright and license
 information please view the LICENSE file that was distributed with this source code.
+
+## Donations
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/srdorado01)
