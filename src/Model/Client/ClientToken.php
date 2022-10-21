@@ -14,9 +14,6 @@ class ClientToken extends AbstractClient
 
     private string $accessKey;
 
-    //Valores retornados por la respuesta
-    private string $accessToken;
-
     private string $startDate;
 
     private string $endDate;
@@ -48,22 +45,6 @@ class ClientToken extends AbstractClient
     public function setUsername(string $username): void
     {
         $this->username = $username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAccessKey(): string
-    {
-        return $this->accessKey;
-    }
-
-    /**
-     * @param string $accessKey
-     */
-    public function setAccessKey(string $accessKey): void
-    {
-        $this->accessKey = $accessKey;
     }
 
     /**
@@ -186,12 +167,15 @@ class ClientToken extends AbstractClient
 
         $result = $this->post($urlRequest, $headers, json_encode($body));
 
-        if ($result['code'] === 200) {
+        if ($result['code'] === 201) {
             $body = json_decode($result['contents'], true);
             $this->accessToken = $body['access_token'];
             $this->expirationTime = $body['expires_in'];
             $this->tokenType = $body['token_type'];
             $this->scope = $body['scope'];
+        } else {
+            $message =  'reponse - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
         }
 
         return $this->accessToken ?? '';

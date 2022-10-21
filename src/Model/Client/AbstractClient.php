@@ -12,6 +12,8 @@ abstract class AbstractClient
 
     protected AbstractValidator $validator;
 
+    protected string $accessToken;
+
     /**
      * @return string
      */
@@ -42,6 +44,22 @@ abstract class AbstractClient
     public function setClient(\GuzzleHttp\Client $client): void
     {
         $this->client = $client;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccessKey(): string
+    {
+        return $this->accessKey;
+    }
+
+    /**
+     * @param string $accessKey
+     */
+    public function setAccessKey(string $accessKey): void
+    {
+        $this->accessKey = $accessKey;
     }
 
     /**
