@@ -84,6 +84,16 @@ abstract class AbstractClient
         ];
     }
 
+    protected function get(string $urlRequest, array $headers, string  $body = ''): array
+    {
+        $request = new \GuzzleHttp\Psr7\Request('GET', $urlRequest, $headers, $body);
+        $result = $this->client->sendAsync($request)->wait();
+        return [
+            'code' => $result->getStatusCode(),
+            'contents' => (string)$result->getBody()
+        ];
+    }
+
 
     /**
      * @param array $params

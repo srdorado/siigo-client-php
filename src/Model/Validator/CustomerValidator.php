@@ -95,6 +95,6 @@ class CustomerValidator extends AbstractValidator
     {
         //GET: url with base url include
        //VALIDATE CUSTOMER URLS
-        $this->urlFactory->getUrl($endPoint, $entity);
+        return $this->urlFactory->getUrl($endPoint, $entity);
     }
 }

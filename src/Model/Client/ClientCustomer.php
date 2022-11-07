@@ -50,6 +50,24 @@ class ClientCustomer extends AbstractClient
         return $clientId;
     }
 
+    public function getAll(EntityInterface $entity = null): array
+    {
+        $clients = [];
+        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_ALL, $entity);
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Customer::CREATE, $entity);
+        $urlRequest = $this->getRequestUrl($url);
+        $result = $this->get($urlRequest, $headers);
+        if ($result['code'] === 200) {
+            $clients = json_decode($result['contents'], true);
+        } else {
+            $message =  'reponse - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $clients;
+    }
+
+
     public const CREATE = 'v1/customers';
     public const GET_ALL = 'v1/customers';
     public const GET_BY_ID = 'v1/customers/%s';
