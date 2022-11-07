@@ -4,7 +4,7 @@ namespace Srdorado\SiigoClient\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+class ClientCustomerTest extends TestCase
 {
     /**
      * @test
