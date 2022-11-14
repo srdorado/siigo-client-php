@@ -121,8 +121,6 @@ class ClientCustomerTest extends TestCase
 
         $clientId = $clientCustomer->update($entity);
 
-        echo $clientId;
-
         $this->assertTrue(true);
     }
 
@@ -258,6 +256,16 @@ class ClientCustomerTest extends TestCase
                 ]
             ],
             'contacts' => [
+                [
+                    'first_name' => 'Marcos',
+                    'last_name' => 'Castillo',
+                    'email' => 'marcos.castillo@contacto.com',
+                    'phone' => [
+                        'indicative' => '57',
+                        'number' => '3005003345',
+                        'extension' => '132'
+                    ]
+                ],
                 [
                     'first_name' => 'Marcos',
                     'last_name' => 'Castillo',

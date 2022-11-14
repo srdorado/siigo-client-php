@@ -6,11 +6,21 @@ use Srdorado\SiigoClient\Model\EntityInterface;
 
 class BodyFactory
 {
+    /**
+     * @param EntityInterface $entity
+     * @param array $rules
+     * @return array
+     */
     public function getBody(EntityInterface $entity, array $rules): array
     {
         return $this->merge($rules, $entity->getData(), []);
     }
 
+    /**
+     * @param array $rules
+     * @param array $data
+     * @return array
+     */
     private function merge(array $rules, array $data): array
     {
         $body = [];
@@ -22,9 +32,7 @@ class BodyFactory
                 $keyData = intval($key);
             }
 
-            if (is_array($rule)) {
-                $body['$key'] = $this->merge($rule, $data[$keyData]);
-            }
+            //TODO: vaidate second level and array array
 
             $body[$key] = $data[$keyData];
         }

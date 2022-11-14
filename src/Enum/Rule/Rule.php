@@ -9,7 +9,7 @@ class Rule
     public const LONG_STRING = 'long_string';
     public const STRING = 'string';
     public const SMALL_STRING = 'small_string';
-    public const FLOAT = 'email';
+    public const FLOAT = 'float';
     public const INT = 'int';
     public const BOOL = 'bool';
 

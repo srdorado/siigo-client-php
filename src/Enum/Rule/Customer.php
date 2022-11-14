@@ -22,11 +22,13 @@ class Customer
             ]
         ],
         'phones' => [
+            //list
             [
                 'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
             ]
         ],
         'contacts' => [
+            //list
             [
                 'first_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
                 'last_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
@@ -46,6 +48,7 @@ class Customer
         'id_type' => Rule::SMALL_STRING . ':13,31,22,42,50,R-00-PN,91,41,47,11,43,21,12', //Values in Colombia
         'identification' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':13',
         'name' => [
+            //list
             '0' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30'
         ],
         'commercial_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
@@ -61,11 +64,13 @@ class Customer
             ]
         ],
         'phones' => [
+            //list
             [
                 'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
             ]
         ],
         'contacts' => [
+            //list
             [
                 'first_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
                 'last_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',

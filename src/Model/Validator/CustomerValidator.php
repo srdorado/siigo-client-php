@@ -9,6 +9,9 @@ use Srdorado\SiigoClient\Enum\EndPoint\Customer as EndPoint;
 
 class CustomerValidator extends AbstractValidator
 {
+    /**
+     * Construct
+     */
     public function __construct()
     {
         $this->validator = new \Srdorado\SiigoClient\Utils\Validator();
@@ -80,6 +83,11 @@ class CustomerValidator extends AbstractValidator
         }
     }
 
+    /**
+     * @param string $endPoint
+     * @param EntityInterface $entity
+     * @return array
+     */
     public function getBody(string $endPoint, EntityInterface $entity): array
     {
         $rules = [];

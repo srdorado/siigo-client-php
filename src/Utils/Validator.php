@@ -101,7 +101,7 @@ class Validator
             }
 
             if (is_array($rule)) {
-                $this->validateMatch($data[$keyData], $rule);
+                $this->validateArray($data[$keyData], $rule);
                 continue;
             }
 
@@ -111,6 +111,36 @@ class Validator
 
             $this->validateCustomRules($customRules, $value);
         }
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    private function validateArray(array $data, array $rule): void
+    {
+        if ($this->isArrayArray($rule)) {
+            foreach ($data as $a) {
+                $this->validateMatch($a, $rule[0]);
+            }
+        } else {
+            $this->validateMatch($data, $rule);
+        }
+    }
+
+    /**
+     * @param array $array
+     * @return bool
+     */
+    private function isArrayArray(array $array): bool
+    {
+        $result = true;
+        foreach ($array as $key => $value) {
+            if (!is_array($value)) {
+                $result = false;
+                break;
+            }
+        }
+        return $result;
     }
 
     /**
