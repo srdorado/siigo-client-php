@@ -18,7 +18,7 @@ class ClientCustomer extends AbstractClient
     public function __construct(string $baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
-        $this->client = new \GuzzleHttp\Client();
+        $this->initGuzzleClient();
         $this->validator = new CustomerValidator();
     }
 

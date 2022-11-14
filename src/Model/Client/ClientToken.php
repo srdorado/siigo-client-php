@@ -24,10 +24,15 @@ class ClientToken extends AbstractClient
 
     private string $scope;
 
+    /**
+     * Construct
+     *
+     * @param string $baseUrl
+     */
     public function __construct(string $baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
-        $this->client = new \GuzzleHttp\Client();
+        $this->initGuzzleClient();
         $this->validator = new TokenValidator();
     }
 

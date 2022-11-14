@@ -14,7 +14,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",
-        "guzzlehttp/guzzle": "7.5.0"
+        "guzzlehttp/guzzle": "7.5.0",
+        "spatie/guzzle-rate-limiter-middleware": "2.0.1"
     },
     "autoload": {
         "psr-4": {

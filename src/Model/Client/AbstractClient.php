@@ -3,6 +3,8 @@
 namespace Srdorado\SiigoClient\Model\Client;
 
 use Srdorado\SiigoClient\Model\Validator\AbstractValidator;
+use GuzzleHttp\HandlerStack;
+use Spatie\GuzzleRateLimiterMiddleware\RateLimiterMiddleware;
 
 abstract class AbstractClient
 {
@@ -13,6 +15,24 @@ abstract class AbstractClient
     protected AbstractValidator $validator;
 
     protected string $accessToken;
+
+
+    /**
+     * Init GuzzleClient and set limit request per minute
+     *
+     * @return void
+     */
+    protected function initGuzzleClient(): void
+    {
+        $stack = HandlerStack::create();
+        $stack->push(RateLimiterMiddleware::perMinute(100));
+
+        $this->client = new \GuzzleHttp\Client(
+            [
+                'handler' => $stack,
+            ]
+        );
+    }
 
     /**
      * @return string

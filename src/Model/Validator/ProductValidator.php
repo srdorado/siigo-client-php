@@ -21,6 +21,7 @@ class ProductValidator extends AbstractValidator
     public function getBody(string $endPoint, EntityInterface $entity): array
     {
         // TODO: Implement getBody() method.
+        return [];
     }
 
     /**
@@ -30,6 +31,6 @@ class ProductValidator extends AbstractValidator
      */
     public function getUrl(string $endPoint, EntityInterface $entity): string
     {
-        $this->urlFactory->getUrl($endPoint, $entity);
+        return $this->urlFactory->getUrl($endPoint, $entity);
     }
 }
