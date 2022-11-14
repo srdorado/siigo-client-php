@@ -11,7 +11,7 @@ class RuleBoolValidator implements RuleValidator
      */
     public function validate($dataRule, $value)
     {
-        if (is_bool($value)) {
+        if (!is_bool($value)) {
             $message = ' data is not of type boolean';
             throw new \Srdorado\SiigoClient\Exception\Rule\BodyRuleRequestException($message);
         }

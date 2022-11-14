@@ -30,7 +30,12 @@ class Customer
             [
                 'first_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
                 'last_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
-                'email' => Rule::E_MAIL
+                'email' => Rule::E_MAIL,
+                'phone' => [
+                    'indicative' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
+                    'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
+                    'extension' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3'
+                ]
             ]
         ]
     ];
@@ -66,18 +71,16 @@ class Customer
                 'last_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
                 'email' => Rule::E_MAIL,
                 'phone' => [
-                    [
-                        'indicative' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
-                        'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
-                        'extension' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
-                    ]
+                    'indicative' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
+                    'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
+                    'extension' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3'
                 ],
             ]
         ],
         'comments' => Rule::SMALL_STRING  . '|' . Rule::MAX_LENGTH . ':150',
         'related_users' => [
-            'seller_id' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
-            'collector_id' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
+            'seller_id' => Rule::INT,
+            'collector_id' => Rule::INT,
         ],
     ];
 
@@ -87,5 +90,10 @@ class Customer
 
     public const DELETE_PARAMS = [
         'customer_id' => Rule::STRING,
+    ];
+
+    public const GET_ALL_PARAMS = [
+        'page' => Rule::INT,
+        'page_size' => Rule::INT,
     ];
 }

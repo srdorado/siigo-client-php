@@ -51,7 +51,7 @@ abstract class AbstractClient
      */
     public function getAccessKey(): string
     {
-        return $this->accessKey;
+        return $this->accessToken;
     }
 
     /**
@@ -59,7 +59,7 @@ abstract class AbstractClient
      */
     public function setAccessKey(string $accessKey): void
     {
-        $this->accessKey = $accessKey;
+        $this->accessToken = $accessKey;
     }
 
     /**
@@ -94,6 +94,25 @@ abstract class AbstractClient
         ];
     }
 
+    protected function put(string $urlRequest, array $headers, string  $body = ''): array
+    {
+        $request = new \GuzzleHttp\Psr7\Request('PUT', $urlRequest, $headers, $body);
+        $result = $this->client->sendAsync($request)->wait();
+        return [
+            'code' => $result->getStatusCode(),
+            'contents' => (string)$result->getBody()
+        ];
+    }
+
+    protected function del(string $urlRequest, array $headers, string  $body = ''): array
+    {
+        $request = new \GuzzleHttp\Psr7\Request('DELETE', $urlRequest, $headers, $body);
+        $result = $this->client->sendAsync($request)->wait();
+        return [
+            'code' => $result->getStatusCode(),
+            'contents' => (string)$result->getBody()
+        ];
+    }
 
     /**
      * @param array $params

@@ -25,7 +25,7 @@ class CustomerValidator extends AbstractValidator
             case EndPoint::CREATE:
                 // if complete or nomral
                 $rule = Rule::CREATE_BASIC_JSON;
-                if (count(Rule::CREATE_COMPLETE_JSON)) {
+                if (count(Rule::CREATE_COMPLETE_JSON) === $entity->countData()) {
                     $rule = Rule::CREATE_COMPLETE_JSON;
                 }
                 $this->validator->validate(
@@ -36,20 +36,26 @@ class CustomerValidator extends AbstractValidator
                 );
                 //request body
                 break;
-            case EndPoint::UPDATE:
+            case EndPoint::UPDATE . 'U':
                 //AbstractValidator::URL_REQUEST]
                 $rule = Rule::CREATE_BASIC_JSON;
-                if (count(Rule::CREATE_COMPLETE_JSON)) {
+                if (count(Rule::CREATE_COMPLETE_JSON) === $entity->countData()) {
                     $rule = Rule::CREATE_COMPLETE_JSON;
                 }
                 $this->validator->validate(
                     AbstractValidator::URL_BODY_REQUEST,
                     $entity,
                     $rule,
-                    EndPoint::CREATE
+                    EndPoint::UPDATE
                 );
                 break;
             case EndPoint::GET_ALL:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_ALL_PARAMS,
+                    EndPoint::GET_ALL
+                );
                 //NO validation
                 break;
             case EndPoint::GET_BY_ID:
@@ -60,7 +66,7 @@ class CustomerValidator extends AbstractValidator
                     EndPoint::GET_BY_ID
                 );
                 break;
-            case EndPoint::DELETE:
+            case EndPoint::DELETE . 'D':
                 $this->validator->validate(
                     AbstractValidator::URL_REQUEST,
                     $entity,
@@ -79,7 +85,7 @@ class CustomerValidator extends AbstractValidator
         $rules = [];
         if ($endPoint === EndPoint::CREATE || $endPoint === EndPoint::UPDATE) {
             $rules = Rule::CREATE_BASIC_JSON;
-            if (count(Rule::CREATE_COMPLETE_JSON)) {
+            if (count(Rule::CREATE_COMPLETE_JSON) === $entity->countData()) {
                 $rules = Rule::CREATE_COMPLETE_JSON;
             }
         }
@@ -93,8 +99,6 @@ class CustomerValidator extends AbstractValidator
      */
     public function getUrl(string $endPoint, EntityInterface $entity): string
     {
-        //GET: url with base url include
-       //VALIDATE CUSTOMER URLS
         return $this->urlFactory->getUrl($endPoint, $entity);
     }
 }

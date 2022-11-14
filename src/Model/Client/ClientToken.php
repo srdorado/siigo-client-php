@@ -167,7 +167,7 @@ class ClientToken extends AbstractClient
 
         $result = $this->post($urlRequest, $headers, json_encode($body));
 
-        if ($result['code'] === 201) {
+        if ($result['code'] === 200) {
             $body = json_decode($result['contents'], true);
             $this->accessToken = $body['access_token'];
             $this->expirationTime = $body['expires_in'];

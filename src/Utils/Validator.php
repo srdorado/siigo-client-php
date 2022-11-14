@@ -102,6 +102,7 @@ class Validator
 
             if (is_array($rule)) {
                 $this->validateMatch($data[$keyData], $rule);
+                continue;
             }
 
             $value = $data[$keyData];

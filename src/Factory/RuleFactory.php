@@ -41,8 +41,5 @@ class RuleFactory extends AbstractFactory
         }
 
         return $instance;
-
-
-        return new \ReflectionClass($class);
     }
 }
