@@ -24,10 +24,15 @@ class ClientToken extends AbstractClient
 
     private string $scope;
 
+    /**
+     * Construct
+     *
+     * @param string $baseUrl
+     */
     public function __construct(string $baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
-        $this->client = new \GuzzleHttp\Client();
+        $this->initGuzzleClient();
         $this->validator = new TokenValidator();
     }
 
@@ -167,7 +172,7 @@ class ClientToken extends AbstractClient
 
         $result = $this->post($urlRequest, $headers, json_encode($body));
 
-        if ($result['code'] === 201) {
+        if ($result['code'] === 200) {
             $body = json_decode($result['contents'], true);
             $this->accessToken = $body['access_token'];
             $this->expirationTime = $body['expires_in'];

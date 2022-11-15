@@ -60,6 +60,23 @@ class Entity implements EntityInterface
     }
 
     /**
+     * Get key: value array and delete
+     *
+     * @param string $key
+     * @param $value
+     * @return array
+     */
+    public function getAndRemove(string $key): array
+    {
+        $result = [];
+        if (array_key_exists($key, $this->data)) {
+            $result[$key] = $this->data[$key];
+            unset($this->data[$key]);
+        }
+        return $result;
+    }
+
+    /**
      * @return int
      */
     public function countData(): int

@@ -11,6 +11,7 @@ class RuleFactory extends AbstractFactory
         'string' => \Srdorado\SiigoClient\Model\RuleValidator\RuleStringValidator::class,
         'small_string' => \Srdorado\SiigoClient\Model\RuleValidator\RuleSmallStringValidator::class,
         'int' => \Srdorado\SiigoClient\Model\RuleValidator\RuleIntValidator::class,
+        'float' => \Srdorado\SiigoClient\Model\RuleValidator\RuleFloatValidator::class,
         'bool' => \Srdorado\SiigoClient\Model\RuleValidator\RuleBoolValidator::class,
         'max_length' => \Srdorado\SiigoClient\Model\RuleValidator\RuleMaxLengthValidator::class,
         'min_length' => \Srdorado\SiigoClient\Model\RuleValidator\RuleMinLengthValidator::class,
@@ -41,8 +42,5 @@ class RuleFactory extends AbstractFactory
         }
 
         return $instance;
-
-
-        return new \ReflectionClass($class);
     }
 }

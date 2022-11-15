@@ -3,6 +3,8 @@
 namespace Srdorado\SiigoClient\Model\Client;
 
 use Srdorado\SiigoClient\Model\Validator\AbstractValidator;
+use GuzzleHttp\HandlerStack;
+use Spatie\GuzzleRateLimiterMiddleware\RateLimiterMiddleware;
 
 abstract class AbstractClient
 {
@@ -13,6 +15,24 @@ abstract class AbstractClient
     protected AbstractValidator $validator;
 
     protected string $accessToken;
+
+
+    /**
+     * Init GuzzleClient and set limit request per minute
+     *
+     * @return void
+     */
+    protected function initGuzzleClient(): void
+    {
+        $stack = HandlerStack::create();
+        $stack->push(RateLimiterMiddleware::perMinute(100));
+
+        $this->client = new \GuzzleHttp\Client(
+            [
+                'handler' => $stack,
+            ]
+        );
+    }
 
     /**
      * @return string
@@ -51,7 +71,7 @@ abstract class AbstractClient
      */
     public function getAccessKey(): string
     {
-        return $this->accessKey;
+        return $this->accessToken;
     }
 
     /**
@@ -59,7 +79,7 @@ abstract class AbstractClient
      */
     public function setAccessKey(string $accessKey): void
     {
-        $this->accessKey = $accessKey;
+        $this->accessToken = $accessKey;
     }
 
     /**
@@ -94,6 +114,25 @@ abstract class AbstractClient
         ];
     }
 
+    protected function put(string $urlRequest, array $headers, string  $body = ''): array
+    {
+        $request = new \GuzzleHttp\Psr7\Request('PUT', $urlRequest, $headers, $body);
+        $result = $this->client->sendAsync($request)->wait();
+        return [
+            'code' => $result->getStatusCode(),
+            'contents' => (string)$result->getBody()
+        ];
+    }
+
+    protected function del(string $urlRequest, array $headers, string  $body = ''): array
+    {
+        $request = new \GuzzleHttp\Psr7\Request('DELETE', $urlRequest, $headers, $body);
+        $result = $this->client->sendAsync($request)->wait();
+        return [
+            'code' => $result->getStatusCode(),
+            'contents' => (string)$result->getBody()
+        ];
+    }
 
     /**
      * @param array $params

@@ -22,15 +22,22 @@ class Customer
             ]
         ],
         'phones' => [
+            //list
             [
                 'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
             ]
         ],
         'contacts' => [
+            //list
             [
                 'first_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
                 'last_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
-                'email' => Rule::E_MAIL
+                'email' => Rule::E_MAIL,
+                'phone' => [
+                    'indicative' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
+                    'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
+                    'extension' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3'
+                ]
             ]
         ]
     ];
@@ -41,6 +48,7 @@ class Customer
         'id_type' => Rule::SMALL_STRING . ':13,31,22,42,50,R-00-PN,91,41,47,11,43,21,12', //Values in Colombia
         'identification' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':13',
         'name' => [
+            //list
             '0' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30'
         ],
         'commercial_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
@@ -56,28 +64,28 @@ class Customer
             ]
         ],
         'phones' => [
+            //list
             [
                 'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
             ]
         ],
         'contacts' => [
+            //list
             [
                 'first_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
                 'last_name' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30',
                 'email' => Rule::E_MAIL,
                 'phone' => [
-                    [
-                        'indicative' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
-                        'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
-                        'extension' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
-                    ]
+                    'indicative' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
+                    'number' =>  Rule::NUM_STRING  . '|' . Rule::LENGTH . ':10',
+                    'extension' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3'
                 ],
             ]
         ],
         'comments' => Rule::SMALL_STRING  . '|' . Rule::MAX_LENGTH . ':150',
         'related_users' => [
-            'seller_id' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
-            'collector_id' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':3',
+            'seller_id' => Rule::INT,
+            'collector_id' => Rule::INT,
         ],
     ];
 
@@ -87,5 +95,10 @@ class Customer
 
     public const DELETE_PARAMS = [
         'customer_id' => Rule::STRING,
+    ];
+
+    public const GET_ALL_PARAMS = [
+        'page' => Rule::INT,
+        'page_size' => Rule::INT,
     ];
 }
