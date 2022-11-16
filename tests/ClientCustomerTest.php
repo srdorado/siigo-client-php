@@ -234,6 +234,7 @@ class ClientCustomerTest extends TestCase
             'person_type' => 'Company',
             'id_type' => '31',
             'identification' => '38211180',
+            'check_digit' => '',
             'name' => [
                 'Stark Industries'
             ],
@@ -241,6 +242,11 @@ class ClientCustomerTest extends TestCase
             'branch_office' => 0,
             'active' => true,
             'vat_responsible' => true,
+            'fiscal_responsibilities' => [
+                [
+                    'code' => 'R-99-PN'
+                ]
+            ],
             'address' => [
                 'address' => 'Cra. 18 #79A - 42',
                 'city' => [
@@ -252,20 +258,12 @@ class ClientCustomerTest extends TestCase
             ],
             'phones' => [
                 [
-                    'number' => '3006003344'
+                    'indicative' => '',
+                    'number' => '3006003344',
+                    'extension' => ''
                 ]
             ],
             'contacts' => [
-                [
-                    'first_name' => 'Marcos',
-                    'last_name' => 'Castillo',
-                    'email' => 'marcos.castillo@contacto.com',
-                    'phone' => [
-                        'indicative' => '57',
-                        'number' => '3005003345',
-                        'extension' => '132'
-                    ]
-                ],
                 [
                     'first_name' => 'Marcos',
                     'last_name' => 'Castillo',

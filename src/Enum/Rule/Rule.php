@@ -12,6 +12,7 @@ class Rule
     public const FLOAT = 'float';
     public const INT = 'int';
     public const BOOL = 'bool';
+    public const OPTIONAL = 'optional';
 
 
     public const MAX_LENGTH = 'max_length';

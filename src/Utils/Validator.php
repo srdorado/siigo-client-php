@@ -94,6 +94,15 @@ class Validator
     private function validateMatch(array $data, array $rules)
     {
         foreach ($rules as $key => $rule) {
+            if (strpos($key, '*') !== false) {
+                $tam = strlen($key);
+                $key = substr($key, 1, $tam);
+                echo $key . PHP_EOL;
+                if (!array_key_exists($key, $data)) {
+                    continue;
+                }
+            }
+
             $keyData = $key;
 
             if (is_numeric($key)) {
@@ -155,6 +164,13 @@ class Validator
             $dataRule = explode(':', $rule);
             $ruleName = $dataRule[0];
             $ruleConstraint = count($dataRule) > 1 ? $dataRule[1] : '';
+            if ($ruleName === \Srdorado\SiigoClient\Enum\Rule\Rule::OPTIONAL) {
+                if ($value === '') {
+                    break;
+                } else {
+                    continue;
+                }
+            }
             $modelRule = $this->ruleFactory->create($ruleName);
             $modelRule->validate($ruleConstraint, $value);
             unset($modelRule);

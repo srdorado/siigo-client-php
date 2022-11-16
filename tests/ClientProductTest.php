@@ -262,7 +262,7 @@ class ClientProductTest extends TestCase
             'reference' => 'REF1',
             'description' => 'Camiseta de algodón blanca',
             'additional_fields' => [
-                    'barcode' => 'B0123',
+                'barcode' => 'B0123',
                 'brand' => 'Gef',
                 'tariff' => '151612',
                 'model' => 'Loiry'
