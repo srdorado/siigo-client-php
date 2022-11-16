@@ -26,6 +26,14 @@ class BodyFactory
         $body = [];
 
         foreach ($rules as $key => $rule) {
+            if (strpos($key, '*') !== false) {
+                $tam = strlen($key);
+                $key = substr($key, 1, $tam);
+                if (!array_key_exists($key, $data)) {
+                    continue;
+                }
+            }
+
             $keyData = $key;
 
             if (is_numeric($key)) {
