@@ -38,16 +38,21 @@ class Product
                 ]
             ]
         ],
-        'unit' => Rule::SMALL_STRING,
+        'unit' => [
+            'code' => Rule::SMALL_STRING,
+            'name' => Rule::SMALL_STRING,
+        ],
         'unit_label' => Rule::SMALL_STRING,
-        'reference' => Rule::SMALL_STRING,
+        'reference' => Rule::STRING,
         'description' => Rule::STRING,
         'additional_fields' => [
             'barcode' => Rule::SMALL_STRING,
             'brand' => Rule::SMALL_STRING,
             'tariff' => Rule::SMALL_STRING,
             'model' => Rule::SMALL_STRING
-        ]
+        ],
+        'available_quantity' => Rule::INT,
+        'warehouses' => Rule::ARRAY
     ];
 
     public const GET_BY_ID_PARAMS = [

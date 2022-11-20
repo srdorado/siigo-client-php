@@ -13,6 +13,7 @@ class Rule
     public const INT = 'int';
     public const BOOL = 'bool';
     public const OPTIONAL = 'optional';
+    public const ARRAY = 'array';
 
 
     public const MAX_LENGTH = 'max_length';

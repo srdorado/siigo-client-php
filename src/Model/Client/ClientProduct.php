@@ -21,6 +21,10 @@ class ClientProduct extends AbstractClient
         $this->validator = new ProductValidator();
     }
 
+    /**
+     * @param array $params
+     * @return array
+     */
     public function getHeaders(array $params = []): array
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
@@ -179,6 +183,50 @@ class ClientProduct extends AbstractClient
         if ($result['code'] === 200) {
             $body = json_decode($result['contents'], true);
             $result = $body['deleted'];
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $result;
+    }
+
+    /**
+     * Get account groups
+     *
+     * @return array
+     * @throws BadRequest
+     */
+    public function getAccountGroups(): array
+    {
+        $result = false;
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Product::ACCOUNT_GROUPS);
+        $urlRequest = $this->getRequestUrl($url);
+        $result = $this->get($urlRequest, $headers);
+        if ($result['code'] === 200) {
+            $result = json_decode($result['contents'], true);
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $result;
+    }
+
+    /**
+     * Get WareHouses
+     *
+     * @return array
+     * @throws BadRequest
+     */
+    public function getWareHouses(): array
+    {
+        $result = false;
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Product::WAREHOUSES);
+        $urlRequest = $this->getRequestUrl($url);
+        $result = $this->get($urlRequest, $headers);
+        if ($result['code'] === 200) {
+            $result = json_decode($result['contents'], true);
         } else {
             $message =  'response - ' . $result['contents'];
             throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);

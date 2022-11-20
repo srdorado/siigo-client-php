@@ -113,10 +113,10 @@ class ProductValidator extends AbstractValidator
 
     /**
      * @param string $endPoint
-     * @param EntityInterface $entity
+     * @param EntityInterface|null $entity
      * @return string
      */
-    public function getUrl(string $endPoint, EntityInterface $entity): string
+    public function getUrl(string $endPoint, EntityInterface $entity = null): string
     {
         return $this->urlFactory->getUrl($endPoint, $entity);
     }
