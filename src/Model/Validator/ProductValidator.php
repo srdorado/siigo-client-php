@@ -31,7 +31,7 @@ class ProductValidator extends AbstractValidator
             case EndPoint::CREATE:
                 // if complete or nomral
                 $rule = Rule::CREATE_BASIC_JSON;
-                if (count(Rule::CREATE_COMPLETE_JSON) === $entity->countData()) {
+                if (count(Rule::CREATE_BASIC_JSON) != $entity->countData()) {
                     $rule = Rule::CREATE_COMPLETE_JSON;
                 }
                 $this->validator->validate(
@@ -45,7 +45,7 @@ class ProductValidator extends AbstractValidator
             case EndPoint::UPDATE . 'U':
                 //AbstractValidator::URL_REQUEST]
                 $rule = Rule::CREATE_BASIC_JSON;
-                if (count(Rule::CREATE_COMPLETE_JSON) === $entity->countData()) {
+                if (count(Rule::CREATE_BASIC_JSON) != $entity->countData()) {
                     $rule = Rule::CREATE_COMPLETE_JSON;
                 }
                 $this->validator->validate(
@@ -113,10 +113,10 @@ class ProductValidator extends AbstractValidator
 
     /**
      * @param string $endPoint
-     * @param EntityInterface $entity
+     * @param EntityInterface|null $entity
      * @return string
      */
-    public function getUrl(string $endPoint, EntityInterface $entity): string
+    public function getUrl(string $endPoint, EntityInterface $entity = null): string
     {
         return $this->urlFactory->getUrl($endPoint, $entity);
     }

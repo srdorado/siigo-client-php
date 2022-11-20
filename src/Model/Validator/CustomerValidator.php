@@ -28,7 +28,7 @@ class CustomerValidator extends AbstractValidator
             case EndPoint::CREATE:
                 // if complete or nomral
                 $rule = Rule::CREATE_BASIC_JSON;
-                if (count(Rule::CREATE_COMPLETE_JSON) === $entity->countData()) {
+                if (count(Rule::CREATE_BASIC_JSON) != $entity->countData()) {
                     $rule = Rule::CREATE_COMPLETE_JSON;
                 }
                 $this->validator->validate(
@@ -42,7 +42,7 @@ class CustomerValidator extends AbstractValidator
             case EndPoint::UPDATE . 'U':
                 //AbstractValidator::URL_REQUEST]
                 $rule = Rule::CREATE_BASIC_JSON;
-                if (count(Rule::CREATE_COMPLETE_JSON) === $entity->countData()) {
+                if (count(Rule::CREATE_BASIC_JSON) != $entity->countData()) {
                     $rule = Rule::CREATE_COMPLETE_JSON;
                 }
                 $this->validator->validate(

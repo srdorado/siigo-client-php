@@ -10,6 +10,8 @@ class Product
     public const GET_BY_CODE = 'v1/products?code=%s';
     public const UPDATE = 'v1/products/%s';
     public const DELETE = 'v1/products/%s';
+    public const ACCOUNT_GROUPS = 'v1/account-groups';
+    public const WAREHOUSES = 'v1/warehouses';
 
     public const HEADER_POST = [
         'Content-Type' => 'application/json',

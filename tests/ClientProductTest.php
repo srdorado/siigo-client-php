@@ -27,7 +27,7 @@ class ClientProductTest extends TestCase
 
         $entity->setData($dataEntity);
 
-        $clientId = $clientProduct->create($entity);
+        $productId = $clientProduct->create($entity);
 
         $this->assertTrue(true);
     }
@@ -181,6 +181,46 @@ class ClientProductTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function getAccountGroups()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::PRODUCT);
+        $clientProduct = $clientProductFactory->create();
+        $clientProduct->setBaseUrl('https://api.siigo.com/');
+        $clientProduct->setAccessKey($token);
+
+        $result = $clientProduct->getAccountGroups();
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
+    public function getWareHouses()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::PRODUCT);
+        $clientProduct = $clientProductFactory->create();
+        $clientProduct->setBaseUrl('https://api.siigo.com/');
+        $clientProduct->setAccessKey($token);
+
+        $result = $clientProduct->getWareHouses();
+
+        $this->assertTrue(true);
+    }
+
+    /**
      * Get token
      *
      * @return string
@@ -229,8 +269,8 @@ class ClientProductTest extends TestCase
     private function getExampleCompleteProduct(): array
     {
         return [
-            'code' => 'Code-20002',
-            'name' => 'Camiseta de algodón 20002',
+            'code' => 'Code-20004',
+            'name' => 'Camiseta de algodón 20004',
             'account_group' => 1253,
             'type' => 'Product',
             'stock_control' => false,
@@ -257,7 +297,10 @@ class ClientProductTest extends TestCase
                     ]
                 ]
             ],
-            'unit' => 'INH',
+            'unit' => [
+                'code' => '94',
+                'name' => 'unidad',
+            ],
             'unit_label' => 'unidad',
             'reference' => 'REF1',
             'description' => 'Camiseta de algodón blanca',
@@ -266,7 +309,9 @@ class ClientProductTest extends TestCase
                 'brand' => 'Gef',
                 'tariff' => '151612',
                 'model' => 'Loiry'
-            ]
+            ],
+            'available_quantity' => 1,
+            'warehouses' => [1234]
         ];
     }
 }
