@@ -9,17 +9,10 @@ use Srdorado\SiigoClient\Enum\EndPoint\Token as EndPointToken;
 
 class TokenValidator extends AbstractValidator
 {
-    public function __construct()
-    {
-        $this->validator = new \Srdorado\SiigoClient\Utils\Validator();
-        $this->bodyFactory = new \Srdorado\SiigoClient\Utils\BodyFactory();
-        $this->urlFactory = new \Srdorado\SiigoClient\Utils\UrlFactory();
-    }
-
     /**
      * @throws UrlRuleRequestException
      */
-    public function validate(string $endPoint, EntityInterface $entity): void
+    public function validate(string $endPoint, EntityInterface $entity = null): void
     {
         if (\Srdorado\SiigoClient\Enum\EndPoint\Token::AUTH !== $endPoint) {
             $message = ' endpoint does not exist.';
@@ -43,15 +36,5 @@ class TokenValidator extends AbstractValidator
         }
 
         return $this->bodyFactory->getBody($entity, $rules);
-    }
-
-    /**
-     * @param string $endPoint
-     * @param EntityInterface $entity
-     * @return string
-     */
-    public function getUrl(string $endPoint, EntityInterface $entity): string
-    {
-        $this->urlFactory->getUrl($endPoint, $entity);
     }
 }

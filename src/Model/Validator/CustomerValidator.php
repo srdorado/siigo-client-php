@@ -9,20 +9,11 @@ use Srdorado\SiigoClient\Enum\EndPoint\Customer as EndPoint;
 
 class CustomerValidator extends AbstractValidator
 {
-    /**
-     * Construct
-     */
-    public function __construct()
-    {
-        $this->validator = new \Srdorado\SiigoClient\Utils\Validator();
-        $this->bodyFactory = new \Srdorado\SiigoClient\Utils\BodyFactory();
-        $this->urlFactory = new \Srdorado\SiigoClient\Utils\UrlFactory();
-    }
 
     /**
      * @throws UrlRuleRequestException
      */
-    public function validate(string $endPoint, EntityInterface $entity): void
+    public function validate(string $endPoint, EntityInterface $entity = null): void
     {
         switch ($endPoint) {
             case EndPoint::CREATE:
@@ -42,7 +33,7 @@ class CustomerValidator extends AbstractValidator
             case EndPoint::UPDATE . 'U':
                 //AbstractValidator::URL_REQUEST]
                 $rule = Rule::CREATE_BASIC_JSON;
-                if (count(Rule::CREATE_BASIC_JSON) != $entity->countData()) {
+                if (count(Rule::CREATE_BASIC_JSON) != $entity->countData() - 1) {
                     $rule = Rule::CREATE_COMPLETE_JSON;
                 }
                 $this->validator->validate(
@@ -138,15 +129,5 @@ class CustomerValidator extends AbstractValidator
             }
         }
         return $this->bodyFactory->getBody($entity, $rules);
-    }
-
-    /**
-     * @param string $endPoint
-     * @param EntityInterface $entity
-     * @return string
-     */
-    public function getUrl(string $endPoint, EntityInterface $entity): string
-    {
-        return $this->urlFactory->getUrl($endPoint, $entity);
     }
 }

@@ -189,7 +189,7 @@ class ClientCustomerTest extends TestCase
         return [
             'person_type' => 'Person',
             'id_type' => '13',
-            'identification' => '28211310',
+            'identification' => '28211220',
             'name' => [
                 'Daniell',
                 'Dorado'
@@ -233,12 +233,12 @@ class ClientCustomerTest extends TestCase
             'type' => 'Customer',
             'person_type' => 'Company',
             'id_type' => '31',
-            'identification' => '38211180',
-            'check_digit' => '',
+            'identification' => '2821122910',
+            //'check_digit' => '',
             'name' => [
                 'Stark Industries'
             ],
-            'commercial_name' => 'Industries',
+            'commercial_name' => 'Industries www',
             'branch_office' => 0,
             'active' => true,
             'vat_responsible' => true,

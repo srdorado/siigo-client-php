@@ -97,7 +97,6 @@ class Validator
             if (strpos($key, '*') !== false) {
                 $tam = strlen($key);
                 $key = substr($key, 1, $tam);
-                echo $key . PHP_EOL;
                 if (!array_key_exists($key, $data)) {
                     continue;
                 }
