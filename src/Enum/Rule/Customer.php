@@ -102,6 +102,36 @@ class Customer
         'customer_id' => Rule::STRING,
     ];
 
+    public const GET_BY_BRANCH_OFFICE_PARAMS = [
+        'branch_office' => Rule::INT,
+         'page' => Rule::INT,
+        'page_size' => Rule::INT,
+    ];
+
+    public const GET_BY_CREATED_START_PARAMS = [
+        'created_start' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT,
+    ];
+
+    public const GET_BY_UPDATED_START_PARAMS = [
+        'updated_start' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT,
+    ];
+
+    public const GET_BY_CREATED_END_PARAMS = [
+        'created_end' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT,
+    ];
+
+    public const GET_BY_UPDATED_END_PARAMS = [
+        'updated_end' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT,
+    ];
+
     public const DELETE_PARAMS = [
         'customer_id' => Rule::STRING,
     ];

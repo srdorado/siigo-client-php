@@ -16,7 +16,8 @@ class RuleFactory extends AbstractFactory
         'max_length' => \Srdorado\SiigoClient\Model\RuleValidator\RuleMaxLengthValidator::class,
         'min_length' => \Srdorado\SiigoClient\Model\RuleValidator\RuleMinLengthValidator::class,
         'length' => \Srdorado\SiigoClient\Model\RuleValidator\RuleLengthValidator::class,
-        'array' => \Srdorado\SiigoClient\Model\RuleValidator\RuleArrayValidator::class
+        'array' => \Srdorado\SiigoClient\Model\RuleValidator\RuleArrayValidator::class,
+        'date' => \Srdorado\SiigoClient\Model\RuleValidator\RuleDateValidator::class,
     ];
 
     protected string $class;

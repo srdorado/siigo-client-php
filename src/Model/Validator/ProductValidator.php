@@ -62,7 +62,38 @@ class ProductValidator extends AbstractValidator
                     Rule::GET_ALL_PARAMS,
                     EndPoint::GET_ALL
                 );
-                //NO validation
+                break;
+            case EndPoint::GET_BY_CREATED_START:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_CREATED_START_PARAMS,
+                    EndPoint::GET_BY_CREATED_START
+                );
+                break;
+            case EndPoint::GET_BY_UPDATED_START:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_UPDATED_START_PARAMS,
+                    EndPoint::GET_BY_UPDATED_START
+                );
+                break;
+            case EndPoint::GET_BY_CREATED_END:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_CREATED_END_PARAMS,
+                    EndPoint::GET_BY_CREATED_END
+                );
+                break;
+            case EndPoint::GET_BY_UPDATED_END:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_UPDATED_END_PARAMS,
+                    EndPoint::GET_BY_UPDATED_END
+                );
                 break;
             case EndPoint::GET_BY_ID:
                 $this->validator->validate(

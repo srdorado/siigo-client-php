@@ -3,6 +3,7 @@
 namespace Srdorado\SiigoClient\Model\Client;
 
 use Srdorado\SiigoClient\Exception\Rule\BadRequest;
+use Srdorado\SiigoClient\Exception\Rule\UrlRuleRequestException;
 use Srdorado\SiigoClient\Model\EntityInterface;
 use Srdorado\SiigoClient\Model\Validator\AbstractValidator;
 use Srdorado\SiigoClient\Model\Validator\ProductValidator;
@@ -82,6 +83,102 @@ class ClientProduct extends AbstractClient
             throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
         }
         return $products;
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getByCreatedStart(EntityInterface $entity = null): array
+    {
+        $clients = [];
+        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_CREATED_START, $entity);
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_CREATED_START, $entity);
+        $urlRequest = $this->getRequestUrl($url);
+        $result = $this->get($urlRequest, $headers);
+        if ($result['code'] === 200) {
+            $body = json_decode($result['contents'], true);
+            $clients = $body['results'];
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $clients;
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getByUpdatedStart(EntityInterface $entity = null): array
+    {
+        $clients = [];
+        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_UPDATED_START, $entity);
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_UPDATED_START, $entity);
+        $urlRequest = $this->getRequestUrl($url);
+        $result = $this->get($urlRequest, $headers);
+        if ($result['code'] === 200) {
+            $body = json_decode($result['contents'], true);
+            $clients = $body['results'];
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $clients;
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getByCreatedEnd(EntityInterface $entity = null): array
+    {
+        $clients = [];
+        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_CREATED_END, $entity);
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_CREATED_END, $entity);
+        $urlRequest = $this->getRequestUrl($url);
+        $result = $this->get($urlRequest, $headers);
+        if ($result['code'] === 200) {
+            $body = json_decode($result['contents'], true);
+            $clients = $body['results'];
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $clients;
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getByUpdatedEnd(EntityInterface $entity = null): array
+    {
+        $clients = [];
+        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_UPDATED_END, $entity);
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_UPDATED_END, $entity);
+        $urlRequest = $this->getRequestUrl($url);
+        $result = $this->get($urlRequest, $headers);
+        if ($result['code'] === 200) {
+            $body = json_decode($result['contents'], true);
+            $clients = $body['results'];
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $clients;
     }
 
     /**

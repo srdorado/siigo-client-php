@@ -61,6 +61,46 @@ class CustomerValidator extends AbstractValidator
                 );
                 //NO validation
                 break;
+            case EndPoint::GET_BY_BRANCH_OFFICE:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_BRANCH_OFFICE_PARAMS,
+                    EndPoint::GET_BY_BRANCH_OFFICE
+                );
+                break;
+            case EndPoint::GET_BY_CREATED_START:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_CREATED_START_PARAMS,
+                    EndPoint::GET_BY_CREATED_START
+                );
+                break;
+            case EndPoint::GET_BY_UPDATED_START:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_UPDATED_START_PARAMS,
+                    EndPoint::GET_BY_UPDATED_START
+                );
+                break;
+            case EndPoint::GET_BY_CREATED_END:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_CREATED_END_PARAMS,
+                    EndPoint::GET_BY_CREATED_END
+                );
+                break;
+            case EndPoint::GET_BY_UPDATED_END:
+                $this->validator->validate(
+                    AbstractValidator::URL_REQUEST,
+                    $entity,
+                    Rule::GET_BY_UPDATED_END_PARAMS,
+                    EndPoint::GET_BY_UPDATED_END
+                );
+                break;
             case EndPoint::GET_BY_ID:
                 $this->validator->validate(
                     AbstractValidator::URL_REQUEST,
