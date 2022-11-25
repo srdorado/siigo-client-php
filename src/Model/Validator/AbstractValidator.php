@@ -2,7 +2,6 @@
 
 namespace Srdorado\SiigoClient\Model\Validator;
 
-use Srdorado\SiigoClient\Model\Entity;
 use Srdorado\SiigoClient\Model\EntityInterface;
 
 abstract class AbstractValidator
@@ -17,9 +16,24 @@ abstract class AbstractValidator
 
     protected $urlFactory;
 
-    abstract public function validate(string $endPoint, EntityInterface $entity): void;
+    public function __construct()
+    {
+        $this->validator = new \Srdorado\SiigoClient\Utils\Validator();
+        $this->bodyFactory = new \Srdorado\SiigoClient\Utils\BodyFactory();
+        $this->urlFactory = new \Srdorado\SiigoClient\Utils\UrlFactory();
+    }
+
+    abstract public function validate(string $endPoint, EntityInterface $entity = null): void;
 
     abstract public function getBody(string $endPoint, EntityInterface $entity): array;
 
-    abstract public function getUrl(string $endPoint, EntityInterface $entity): string;
+    /**
+     * @param string $endPoint
+     * @param EntityInterface|null $entity
+     * @return string
+     */
+    public function getUrl(string $endPoint, EntityInterface $entity = null): string
+    {
+        return $this->urlFactory->getUrl($endPoint, $entity);
+    }
 }

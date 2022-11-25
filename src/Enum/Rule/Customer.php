@@ -47,7 +47,7 @@ class Customer
         'person_type' => Rule::SMALL_STRING . ':Person,Company',
         'id_type' => Rule::SMALL_STRING . ':13,31,22,42,50,R-00-PN,91,41,47,11,43,21,12', //Values in Colombia
         'identification' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':13',
-        'check_digit' => Rule::OPTIONAL . '|' . Rule::SMALL_STRING . ':1,2,3,4,5,6,7,8,9',
+        '*check_digit' => Rule::OPTIONAL . '|' . Rule::SMALL_STRING . ':1,2,3,4,5,6,7,8,9',
         'name' => [
             '0' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30'
             //'1' => Rule::OPTIONAL . '|' . Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30'
@@ -94,20 +94,50 @@ class Customer
         'comments' => Rule::SMALL_STRING  . '|' . Rule::MAX_LENGTH . ':150',
         '*related_users' => [
             'seller_id' => Rule::INT,
-            'collector_id' => Rule::INT,
+            'collector_id' => Rule::INT
         ],
     ];
 
     public const GET_BY_ID_PARAMS = [
-        'customer_id' => Rule::STRING,
+        'customer_id' => Rule::STRING
+    ];
+
+    public const GET_BY_BRANCH_OFFICE_PARAMS = [
+        'branch_office' => Rule::INT,
+         'page' => Rule::INT,
+         'page_size' => Rule::INT
+    ];
+
+    public const GET_BY_CREATED_START_PARAMS = [
+        'created_start' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
+    ];
+
+    public const GET_BY_UPDATED_START_PARAMS = [
+        'updated_start' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
+    ];
+
+    public const GET_BY_CREATED_END_PARAMS = [
+        'created_end' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
+    ];
+
+    public const GET_BY_UPDATED_END_PARAMS = [
+        'updated_end' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
     ];
 
     public const DELETE_PARAMS = [
-        'customer_id' => Rule::STRING,
+        'customer_id' => Rule::STRING
     ];
 
     public const GET_ALL_PARAMS = [
         'page' => Rule::INT,
-        'page_size' => Rule::INT,
+        'page_size' => Rule::INT
     ];
 }

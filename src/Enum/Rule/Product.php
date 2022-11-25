@@ -11,7 +11,7 @@ class Product
     ];
 
     public const CREATE_COMPLETE_JSON = [
-        'code' => Rule::STRING ,
+        'code' => Rule::STRING,
         'name' => Rule::STRING,
         'account_group' => Rule::INT,
         'type' => Rule::SMALL_STRING . ':Product,Service,ConsumerGood',
@@ -59,6 +59,30 @@ class Product
         'product_id' => Rule::STRING,
     ];
 
+    public const GET_BY_CREATED_START_PARAMS = [
+        'created_start' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
+    ];
+
+    public const GET_BY_UPDATED_START_PARAMS = [
+        'updated_start' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
+    ];
+
+    public const GET_BY_CREATED_END_PARAMS = [
+        'created_end' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
+    ];
+
+    public const GET_BY_UPDATED_END_PARAMS = [
+        'updated_end' => Rule::DATE,
+        'page' => Rule::INT,
+        'page_size' => Rule::INT
+    ];
+
     public const GET_BY_CODE_PARAMS = [
         'code' => Rule::STRING,
     ];
@@ -69,6 +93,6 @@ class Product
 
     public const GET_ALL_PARAMS = [
         'page' => Rule::INT,
-        'page_size' => Rule::INT,
+        'page_size' => Rule::INT
     ];
 }

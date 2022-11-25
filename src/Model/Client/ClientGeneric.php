@@ -2,12 +2,14 @@
 
 namespace Srdorado\SiigoClient\Model\Client;
 
+use Srdorado\SiigoClient\Enum\Rule\Generic;
 use Srdorado\SiigoClient\Exception\Rule\BadRequest;
-use Srdorado\SiigoClient\Model\Validator\ProductValidator;
+use Srdorado\SiigoClient\Exception\Rule\UrlRuleRequestException;
+use Srdorado\SiigoClient\Model\EntityInterface;
+use Srdorado\SiigoClient\Model\Validator\GenericValidator;
 
 class ClientGeneric extends AbstractClient
 {
-
     /**
      * Construct
      *
@@ -17,7 +19,7 @@ class ClientGeneric extends AbstractClient
     {
         $this->baseUrl = $baseUrl;
         $this->initGuzzleClient();
-        $this->validator = new ProductValidator();
+        $this->validator = new GenericValidator();
     }
 
     /**
@@ -36,20 +38,87 @@ class ClientGeneric extends AbstractClient
      *
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
     public function getTaxes(): array
     {
-        $result = false;
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
-        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Generic::TAXES);
-        $urlRequest = $this->getRequestUrl($url);
-        $result = $this->get($urlRequest, $headers);
-        if ($result['code'] === 200) {
-            $result = json_decode($result['contents'], true);
-        } else {
-            $message =  'response - ' . $result['contents'];
-            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
-        }
-        return $result;
+        return $this->getUrlGenericList(\Srdorado\SiigoClient\Enum\EndPoint\Generic::TAXES);
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getDocumentTypes(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericList(\Srdorado\SiigoClient\Enum\EndPoint\Generic::GET_DOCUMENT_TYPES, $entity);
+    }
+
+    /**
+     * Get price list
+     *
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getPriceList(): array
+    {
+        return $this->getUrlGenericList(\Srdorado\SiigoClient\Enum\EndPoint\Generic::GET_PRICE_LISTS);
+    }
+
+    /**
+     * Get users
+     *
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     */
+    public function getUsers(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericListWithKey(
+            'results',
+            \Srdorado\SiigoClient\Enum\EndPoint\Generic::GET_USERS,
+            $entity
+        );
+    }
+
+
+    /**
+     * Get payment types
+     *
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getPaymentTypes(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericList(\Srdorado\SiigoClient\Enum\EndPoint\Generic::GET_PAYMENT_TYPES, $entity);
+    }
+
+    /**
+     * Get cost centers
+     *
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getCostCenters(): array
+    {
+        return $this->getUrlGenericList(\Srdorado\SiigoClient\Enum\EndPoint\Generic::GET_COST_CENTERS);
+    }
+
+    /**
+     * Get fixed assets centers
+     *
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getFixedAssets(): array
+    {
+        return $this->getUrlGenericList(\Srdorado\SiigoClient\Enum\EndPoint\Generic::GET_FIXED_ASSETS);
     }
 }

@@ -44,45 +44,96 @@ class ClientCustomer extends AbstractClient
      */
     public function create(EntityInterface $entity = null): string
     {
-        //set token before send request
-        $clientId = '';
-        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Customer::CREATE, $entity);
-        $body = $this->validator->getBody(\Srdorado\SiigoClient\Enum\EndPoint\Customer::CREATE, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
-        $urlRequest = $this->getRequestUrl(\Srdorado\SiigoClient\Enum\EndPoint\Customer::CREATE);
-        $result = $this->post($urlRequest, $headers, json_encode($body));
-        if ($result['code'] === 201) {
-            $body = json_decode($result['contents'], true);
-            $clientId = $body['id'];
-        } else {
-            $message =  'response - ' . $result['contents'];
-            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
-        }
-        return $clientId;
+        return $this->getBodyGenericWithKey(
+            'id',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::CREATE,
+            $entity
+        );
     }
 
     /**
      * @param EntityInterface|null $entity
      * @return array
-     * @throws UrlRuleRequestException
      * @throws BadRequest
      */
     public function getAll(EntityInterface $entity = null): array
     {
-        $clients = [];
-        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_ALL, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
-        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_ALL, $entity);
-        $urlRequest = $this->getRequestUrl($url);
-        $result = $this->get($urlRequest, $headers);
-        if ($result['code'] === 200) {
-            $body = json_decode($result['contents'], true);
-            $clients = $body['results'];
-        } else {
-            $message =  'response - ' . $result['contents'];
-            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
-        }
-        return $clients;
+        return $this->getUrlGenericListWithKey(
+            'results',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_ALL,
+            $entity
+        );
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getByBranchOffice(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericListWithKey(
+            'results',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_BRANCH_OFFICE,
+            $entity
+        );
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     */
+    public function getByCreatedStart(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericListWithKey(
+            'results',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_CREATED_START,
+            $entity
+        );
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     */
+    public function getByUpdatedStart(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericListWithKey(
+            'results',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_UPDATED_START,
+            $entity
+        );
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     */
+    public function getByCreatedEnd(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericListWithKey(
+            'results',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_CREATED_END,
+            $entity
+        );
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     */
+    public function getByUpdatedEnd(EntityInterface $entity = null): array
+    {
+        return $this->getUrlGenericListWithKey(
+            'results',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_UPDATED_END,
+            $entity
+        );
     }
 
     /**
@@ -91,24 +142,14 @@ class ClientCustomer extends AbstractClient
      * @param EntityInterface|null $entity
      * @return string
      * @throws BadRequest
-     * @throws UrlRuleRequestException
      */
     public function getById(EntityInterface $entity = null): string
     {
-        $clientId = '';
-        $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_ID, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
-        $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_ID, $entity);
-        $urlRequest = $this->getRequestUrl($url);
-        $result = $this->get($urlRequest, $headers);
-        if ($result['code'] === 200) {
-            $body = json_decode($result['contents'], true);
-            $clientId = $body['id'];
-        } else {
-            $message =  'response - ' . $result['contents'];
-            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
-        }
-        return $clientId;
+        return $this->getUrlGenericWithKey(
+            'id',
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_ID,
+            $entity
+        );
     }
 
     /**

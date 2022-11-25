@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 class ClientGenericTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -23,6 +22,34 @@ class ClientGenericTest extends TestCase
         $clientGeneric->setAccessKey($token);
 
         $result = $clientGeneric->getTaxes();
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
+    public function getDocumentTypes()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::GENERIC);
+        $clientGeneric = $clientProductFactory->create();
+        $clientGeneric->setBaseUrl('https://api.siigo.com/');
+        $clientGeneric->setAccessKey($token);
+
+        // Create entity token
+        $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::TOKEN);
+        $entity->setData(
+            [
+                'type' => 'FV'
+            ]
+        );
+
+        $result = $clientGeneric->getDocumentTypes($entity);
 
         $this->assertTrue(true);
     }

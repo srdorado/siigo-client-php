@@ -14,8 +14,7 @@ class Rule
     public const BOOL = 'bool';
     public const OPTIONAL = 'optional';
     public const ARRAY = 'array';
-
-
+    public const DATE = 'date';
     public const MAX_LENGTH = 'max_length';
     public const MIN_LENGTH = 'min_length';
     public const LENGTH = 'length';

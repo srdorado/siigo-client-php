@@ -50,4 +50,20 @@ class Utils
         $origen = '/' . preg_quote('' . $origen, '/') . '/i';
         return '' . preg_replace($origen, '' . $destino, '' . $txt, 1);
     }
+
+    /**
+     * Validate if date is valid
+     *
+     * @param string $format
+     * @param string $date
+     * @return bool
+     */
+    public static function isDateValid(string $format, string $date): bool
+    {
+        $result = false;
+        if (date($format, strtotime($date)) == $date) {
+            $result = true;
+        }
+        return $result;
+    }
 }

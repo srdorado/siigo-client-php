@@ -64,6 +64,36 @@ class ClientProductTest extends TestCase
     /**
      * @test
      */
+    public function getByCreatedStart()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::PRODUCT);
+        $clientProduct = $clientProductFactory->create();
+        $clientProduct->setBaseUrl('https://api.siigo.com/');
+        $clientProduct->setAccessKey($token);
+
+        $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::PRODUCT);
+
+        $entity->setData(
+            [
+                'created_start' => '1995-12-12',
+                'page' => 1,
+                'page_size' => 25,
+            ]
+        );
+
+        $products = $clientProduct->getByCreatedStart($entity);
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
     public function getById()
     {
         // generate token
