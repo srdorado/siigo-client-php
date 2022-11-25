@@ -11,7 +11,7 @@ class Product
     ];
 
     public const CREATE_COMPLETE_JSON = [
-        'code' => Rule::STRING ,
+        'code' => Rule::STRING,
         'name' => Rule::STRING,
         'account_group' => Rule::INT,
         'type' => Rule::SMALL_STRING . ':Product,Service,ConsumerGood',

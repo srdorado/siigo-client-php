@@ -105,7 +105,7 @@ class Customer
     public const GET_BY_BRANCH_OFFICE_PARAMS = [
         'branch_office' => Rule::INT,
          'page' => Rule::INT,
-        'page_size' => Rule::INT
+         'page_size' => Rule::INT
     ];
 
     public const GET_BY_CREATED_START_PARAMS = [

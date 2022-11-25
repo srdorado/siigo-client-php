@@ -9,7 +9,6 @@ use Srdorado\SiigoClient\Enum\EndPoint\Product as EndPoint;
 
 class ProductValidator extends AbstractValidator
 {
-
     /**
      * @param string $endPoint
      * @param EntityInterface|null $entity

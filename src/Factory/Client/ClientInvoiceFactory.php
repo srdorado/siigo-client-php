@@ -4,7 +4,7 @@ namespace Srdorado\SiigoClient\Factory\Client;
 
 use Srdorado\SiigoClient\Factory\AbstractFactory;
 
-class ClientGenericFactory extends AbstractFactory
+class ClientInvoiceFactory extends AbstractFactory
 {
     public function __construct()
     {
@@ -12,6 +12,6 @@ class ClientGenericFactory extends AbstractFactory
 
     public function create(string $class = '', array $params = [])
     {
-        return new \Srdorado\SiigoClient\Model\Client\ClientGeneric();
+        return new \Srdorado\SiigoClient\Model\Client\ClientInvoice();
     }
 }

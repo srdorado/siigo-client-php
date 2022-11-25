@@ -9,7 +9,6 @@ use Srdorado\SiigoClient\Enum\EndPoint\Customer as EndPoint;
 
 class CustomerValidator extends AbstractValidator
 {
-
     /**
      * @throws UrlRuleRequestException
      */

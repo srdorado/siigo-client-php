@@ -6,7 +6,6 @@ use Srdorado\SiigoClient\Exception\Rule\BodyRuleRequestException;
 
 class RuleArrayValidator implements RuleValidator
 {
-
     /**
      * @throws BodyRuleRequestException
      */
