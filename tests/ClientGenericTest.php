@@ -11,15 +11,7 @@ class ClientGenericTest extends TestCase
      */
     public function getTaxes()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::GENERIC);
-        $clientGeneric = $clientProductFactory->create();
-        $clientGeneric->setBaseUrl('https://api.siigo.com/');
-        $clientGeneric->setAccessKey($token);
+        $clientGeneric = $this->getCustomClient();
 
         $result = $clientGeneric->getTaxes();
 
@@ -31,15 +23,8 @@ class ClientGenericTest extends TestCase
      */
     public function getDocumentTypes()
     {
-        // generate token
-        $token = $this->getToken();
 
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::GENERIC);
-        $clientGeneric = $clientProductFactory->create();
-        $clientGeneric->setBaseUrl('https://api.siigo.com/');
-        $clientGeneric->setAccessKey($token);
+        $clientGeneric = $this->getCustomClient();
 
         // Create entity token
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::TOKEN);
@@ -52,6 +37,25 @@ class ClientGenericTest extends TestCase
         $result = $clientGeneric->getDocumentTypes($entity);
 
         $this->assertTrue(true);
+    }
+
+    /**
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    private function getCustomClient()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::GENERIC);
+        $clientGeneric = $clientProductFactory->create();
+        $clientGeneric->setBaseUrl('https://api.siigo.com/');
+        $clientGeneric->setAccessKey($token);
+
+        return $clientGeneric;
     }
 
     /**

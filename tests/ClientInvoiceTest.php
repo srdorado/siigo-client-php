@@ -11,15 +11,7 @@ class ClientInvoiceTest extends TestCase
      */
     public function create()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::INVOICE);
-        $clientInvoice = $clientProductFactory->create();
-        $clientInvoice->setBaseUrl('https://api.siigo.com/');
-        $clientInvoice->setAccessKey($token);
+        $clientInvoice = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::INVOICE);
 
@@ -37,15 +29,7 @@ class ClientInvoiceTest extends TestCase
      */
     public function update()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::INVOICE);
-        $clientInvoice = $clientProductFactory->create();
-        $clientInvoice->setBaseUrl('https://api.siigo.com/');
-        $clientInvoice->setAccessKey($token);
+        $clientInvoice = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::INVOICE);
 
@@ -74,15 +58,7 @@ class ClientInvoiceTest extends TestCase
      */
     public function getAll()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::INVOICE);
-        $clientInvoice = $clientCustomerFactory->create();
-        $clientInvoice->setBaseUrl('https://api.siigo.com/');
-        $clientInvoice->setAccessKey($token);
+        $clientInvoice = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::INVOICE);
 
@@ -99,6 +75,24 @@ class ClientInvoiceTest extends TestCase
     }
 
 
+    /**
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    private function getCustomClient()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::INVOICE);
+        $clientInvoice = $clientCustomerFactory->create();
+        $clientInvoice->setBaseUrl('https://api.siigo.com/');
+        $clientInvoice->setAccessKey($token);
+
+        return $clientInvoice;
+    }
 
     /**
      * Get token

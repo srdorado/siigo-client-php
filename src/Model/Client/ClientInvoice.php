@@ -33,13 +33,12 @@ class ClientInvoice extends AbstractClient
      * Create invoice in siigo
      *
      * @param EntityInterface|null $entity
-     * @return string //Id de client siggo or ''
+     * @return array
      * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null): string
+    public function create(EntityInterface $entity = null): array
     {
-        return $this->getBodyGenericWithKey(
-            'id',
+        return $this->getBodyGeneric(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::CREATE,
             $entity
         );
@@ -49,14 +48,13 @@ class ClientInvoice extends AbstractClient
      * Update invoice
      *
      * @param EntityInterface|null $entity
-     * @return string
+     * @return array
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function update(EntityInterface $entity = null): string
+    public function update(EntityInterface $entity = null): array
     {
-        //set token before send request
-        $invoiceId = '';
+        $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::UPDATE . 'U', $entity);
         $id = $entity->getAndRemove(AbstractValidator::URL_REQUEST);
         $body = $this->validator->getBody(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::UPDATE, $entity);
@@ -67,26 +65,24 @@ class ClientInvoice extends AbstractClient
         $result = $this->put($urlRequest, $headers, json_encode($body));
         if ($result['code'] === 200) {
             $body = json_decode($result['contents'], true);
-            $invoiceId = $body['id'];
+            $response = $body;
         } else {
             $message =  'response - ' . $result['contents'];
             throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
         }
-        return $invoiceId;
+        return $response;
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getAll(EntityInterface $entity = null): array
+    public function getAll(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
-            \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_ALL,
-            $entity
-        );
+        return $this->getListRequest(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_ALL, $entity, $allResponse);
     }
 
     /**
@@ -169,141 +165,161 @@ class ClientInvoice extends AbstractClient
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByCreatedStart(EntityInterface $entity = null): array
+    public function getByCreatedStart(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CREATED_START,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByUpdatedStart(EntityInterface $entity = null): array
+    public function getByUpdatedStart(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_UPDATED_START,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByDateStart(EntityInterface $entity = null): array
+    public function getByDateStart(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_DATE_START,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByDateEnd(EntityInterface $entity = null): array
+    public function getByDateEnd(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_DATE_END,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByCreatedEnd(EntityInterface $entity = null): array
+    public function getByCreatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CREATED_END,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByUpdatedEnd(EntityInterface $entity = null): array
+    public function getByUpdatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_UPDATED_END,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByCustomerBranchOffice(EntityInterface $entity = null): array
+    public function getByCustomerBranchOffice(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CUSTOMER_BRANCH_OFFICE,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByName(EntityInterface $entity = null): array
+    public function getByName(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_NAME,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByCustomerIdentification(EntityInterface $entity = null): array
+    public function getByCustomerIdentification(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CUSTOMER_IDENTIFICATION,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByDocumentId(EntityInterface $entity = null): array
+    public function getByDocumentId(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_DOCUMENT_ID,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 

@@ -53,86 +53,97 @@ class ClientCustomer extends AbstractClient
 
     /**
      * @param EntityInterface|null $entity
-     * @return array
-     * @throws BadRequest
-     */
-    public function getAll(EntityInterface $entity = null): array
-    {
-        return $this->getUrlGenericListWithKey(
-            'results',
-            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_ALL,
-            $entity
-        );
-    }
-
-    /**
-     * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByBranchOffice(EntityInterface $entity = null): array
+    public function getAll(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
+            \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_ALL,
+            $entity,
+            $allResponse
+        );
+    }
+
+    /**
+     * @param EntityInterface|null $entity
+     * @param bool $allResponse
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getByBranchOffice(EntityInterface $entity = null, bool $allResponse = false): array
+    {
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_BRANCH_OFFICE,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByCreatedStart(EntityInterface $entity = null): array
+    public function getByCreatedStart(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_CREATED_START,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByUpdatedStart(EntityInterface $entity = null): array
+    public function getByUpdatedStart(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_UPDATED_START,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByCreatedEnd(EntityInterface $entity = null): array
+    public function getByCreatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_CREATED_END,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
     /**
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getByUpdatedEnd(EntityInterface $entity = null): array
+    public function getByUpdatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Customer::GET_BY_UPDATED_END,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 

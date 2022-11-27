@@ -2,35 +2,20 @@
 
 namespace Srdorado\SiigoClient\Enum\Rule;
 
-class Invoice
+class CreditNote
 {
-    public const CURRENCIES = 'COP,EUR,USD,ANG,ARS,AUD,BOB,BRL,CAD,CHF,CLP,CRC,GBP,GTQ,HNL,JPY,MXN,NZD,PAB,PEN,SGD,UYU';
-
     public const CREATE_JSON = [
         'document' => [
             'id' => Rule::INT
         ],
         '*number' => Rule::INT,
         'date' => Rule::DATE,
-        'customer' => [
-            'identification' =>  Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':13',
-            'branch_office' => Rule::INT
-        ],
+        'invoice' => Rule::STRING,
         '*cost_center' => Rule::INT,
-        '*currency' => [
-            'code' => Rule::SMALL_STRING . ':' . self::CURRENCIES,
-            'exchange_rate' => Rule::FLOAT
-        ],
-        'seller' => Rule::INT,
-        '*stamp' => [
-            'send' => Rule::BOOL
-        ],
-        '*mail' => [
-            'send' => Rule::BOOL
-        ],
+        'reason' => Rule::SMALL_STRING . ':1,2,3,4,5',
         '*retentions' => [
             [
-              'id' => Rule::INT
+                'id' => Rule::INT
             ]
         ],
         '*observations' => Rule::OPTIONAL . '|' . Rule::STRING,
@@ -58,12 +43,11 @@ class Invoice
                 'value' => Rule::FLOAT,
                 'due_date' => Rule::DATE
             ]
-        ],
-        '*additional_fields' => Rule::ARRAY
+        ]
     ];
 
     public const ID_PARAMS = [
-        'invoice_id' => Rule::STRING
+        'credit_note_id' => Rule::STRING
     ];
 
     public const GEL_ALL_PARAMS = [
@@ -81,10 +65,5 @@ class Invoice
         'generic' => Rule::STRING,
         'page' => Rule::INT,
         'page_size' => Rule::INT
-    ];
-
-    public const GET_EMAIL_PARAMS = [
-        'mail_to' => Rule::E_MAIL,
-        'copy_to' => Rule::STRING
     ];
 }

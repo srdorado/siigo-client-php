@@ -72,15 +72,17 @@ class ClientGeneric extends AbstractClient
      * Get users
      *
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
      * @return array
      * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function getUsers(EntityInterface $entity = null): array
+    public function getUsers(EntityInterface $entity = null, bool $allResponse = false): array
     {
-        return $this->getUrlGenericListWithKey(
-            'results',
+        return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Generic::GET_USERS,
-            $entity
+            $entity,
+            $allResponse
         );
     }
 
