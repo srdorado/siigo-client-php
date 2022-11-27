@@ -5,7 +5,7 @@ namespace Srdorado\SiigoClient\Enum\Rule;
 class Generic
 {
     public const GET_DOCUMENT_TYPES_PARAMS = [
-        'type' => Rule::SMALL_STRING . ':FV,NC,RC'
+        'type' => Rule::SMALL_STRING . ':FV,NC,RC,FC,CC'
     ];
 
     public const GET_USERS_PARAMS = [
@@ -14,6 +14,6 @@ class Generic
     ];
 
     public const GET_PAYMENT_TYPES_PARAMS = [
-        'document_type' =>  Rule::SMALL_STRING . ':FV,NC,RC'
+        'document_type' =>  Rule::SMALL_STRING . ':FV,NC,RC,FC,CC'
     ];
 }

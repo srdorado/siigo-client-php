@@ -15,6 +15,16 @@ interface EntityInterface
     public function setClientType(string $clientType): void;
 
     /**
+     * @return string
+     */
+    public function getRequestType(): string;
+
+    /**
+     * @param string $requestType
+     */
+    public function setRequestType(string $requestType): void;
+
+    /**
      * @return array
      */
     public function getData(): array;

@@ -6,6 +6,8 @@ class Entity implements EntityInterface
 {
     private string $clientType;
 
+    private string $requestType;
+
     private array $data;
 
     /**
@@ -82,5 +84,22 @@ class Entity implements EntityInterface
     public function countData(): int
     {
         return count($this->data);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRequestType(): string
+    {
+        return $this->requestType;
+    }
+
+    /**
+     * @param string $requestType
+     * @return void
+     */
+    public function setRequestType(string $requestType): void
+    {
+        $this->requestType = $requestType;
     }
 }

@@ -152,6 +152,25 @@ abstract class AbstractClient
     /**
      * @param string $endPoint
      * @param EntityInterface|null $entity
+     * @param bool $allResponse
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
+     */
+    public function getListRequest(string $endPoint, EntityInterface $entity = null, bool $allResponse = false): array
+    {
+        $result = [];
+        if ($allResponse) {
+            $result = $this->getUrlGenericList($endPoint, $entity);
+        } else {
+            $result = $this->getUrlGenericListWithKey('results', $endPoint, $entity);
+        }
+        return $result;
+    }
+
+    /**
+     * @param string $endPoint
+     * @param EntityInterface|null $entity
      * @return array
      * @throws BadRequest
      * @throws UrlRuleRequestException|\Srdorado\SiigoClient\Exception\Rule\BadRequest
@@ -248,6 +267,29 @@ abstract class AbstractClient
         return $response;
     }
 
+    /**
+     * @param string $endPoint
+     * @param EntityInterface|null $entity
+     * @return array
+     * @throws BadRequest
+     */
+    protected function getBodyGeneric(string $endPoint, EntityInterface $entity = null): array
+    {
+        $response = [];
+        $this->validator->validate($endPoint, $entity);
+        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $body = $this->validator->getBody($endPoint, $entity);
+        $urlRequest = $this->getRequestUrl($endPoint);
+        $result = $this->post($urlRequest, $headers, json_encode($body));
+        if ($result['code'] === 201) {
+            $result = json_decode($result['contents'], true);
+            $response = $result;
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $response;
+    }
 
     /**
      * @param array $params

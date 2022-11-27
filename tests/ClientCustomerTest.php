@@ -11,15 +11,7 @@ class ClientCustomerTest extends TestCase
      */
     public function create()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
-        $clientCustomer = $clientCustomerFactory->create();
-        $clientCustomer->setBaseUrl('https://api.siigo.com/');
-        $clientCustomer->setAccessKey($token);
+        $clientCustomer = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
 
@@ -37,15 +29,7 @@ class ClientCustomerTest extends TestCase
      */
     public function getAll()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
-        $clientCustomer = $clientCustomerFactory->create();
-        $clientCustomer->setBaseUrl('https://api.siigo.com/');
-        $clientCustomer->setAccessKey($token);
+        $clientCustomer = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
 
@@ -66,15 +50,7 @@ class ClientCustomerTest extends TestCase
      */
     public function getById()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
-        $clientCustomer = $clientCustomerFactory->create();
-        $clientCustomer->setBaseUrl('https://api.siigo.com/');
-        $clientCustomer->setAccessKey($token);
+        $clientCustomer = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
 
@@ -94,15 +70,7 @@ class ClientCustomerTest extends TestCase
      */
     public function update()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
-        $clientCustomer = $clientCustomerFactory->create();
-        $clientCustomer->setBaseUrl('https://api.siigo.com/');
-        $clientCustomer->setAccessKey($token);
+        $clientCustomer = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
 
@@ -129,15 +97,7 @@ class ClientCustomerTest extends TestCase
      */
     public function delete()
     {
-        // generate token
-        $token = $this->getToken();
-
-        // Create client
-        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
-        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
-        $clientCustomer = $clientCustomerFactory->create();
-        $clientCustomer->setBaseUrl('https://api.siigo.com/');
-        $clientCustomer->setAccessKey($token);
+        $clientCustomer = $this->getCustomClient();
 
         $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
 
@@ -150,6 +110,25 @@ class ClientCustomerTest extends TestCase
         $result = $clientCustomer->delete($entity);
 
         $this->assertTrue(true);
+    }
+
+    /**
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    private function getCustomClient()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientCustomerFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::CUSTOMER);
+        $clientCustomer = $clientCustomerFactory->create();
+        $clientCustomer->setBaseUrl('https://api.siigo.com/');
+        $clientCustomer->setAccessKey($token);
+
+        return $clientCustomer;
     }
 
     /**
