@@ -37,13 +37,12 @@ class ClientProduct extends AbstractClient
      * Create product in siigo
      *
      * @param EntityInterface|null $entity
-     * @return string
+     * @return array
      * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null): string
+    public function create(EntityInterface $entity = null): array
     {
-        return $this->getBodyGenericWithKey(
-            'id',
+        return $this->getBodyGeneric(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::CREATE,
             $entity
         );

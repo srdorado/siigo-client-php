@@ -37,7 +37,7 @@ class InvoiceValidator extends AbstractValidator
             EndPoint::STAMP_ERRORS
         ];
 
-        if ($endPoint ===  EndPoint::CREATE || $endPoint ===  EndPoint::UPDATE . 'D') {
+        if ($endPoint ===  EndPoint::CREATE || $endPoint ===  EndPoint::UPDATE . 'U') {
             $rules = Rule::CREATE_JSON;
             $data = $entity->getData();
             if (count($data['customer']) != 2) {
