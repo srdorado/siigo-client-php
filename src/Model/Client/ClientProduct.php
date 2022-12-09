@@ -177,13 +177,14 @@ class ClientProduct extends AbstractClient
      * Update product
      *
      * @param EntityInterface|null $entity
-     * @return string
-     * @throws BadRequest|UrlRuleRequestException
+     * @return array
+     * @throws BadRequest
+     * @throws UrlRuleRequestException
      */
-    public function update(EntityInterface $entity = null): string
+    public function update(EntityInterface $entity = null): array
     {
         //set token before send request
-        $productId = '';
+        $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Product::UPDATE . 'U', $entity);
         $id = $entity->getAndRemove(AbstractValidator::URL_REQUEST);
         $body = $this->validator->getBody(\Srdorado\SiigoClient\Enum\EndPoint\Product::UPDATE, $entity);
@@ -194,12 +195,12 @@ class ClientProduct extends AbstractClient
         $result = $this->put($urlRequest, $headers, json_encode($body));
         if ($result['code'] === 200) {
             $body = json_decode($result['contents'], true);
-            $productId = $body['id'];
+            $response = $body;
         } else {
             $message =  'response - ' . $result['contents'];
             throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
         }
-        return $productId;
+        return $response;
     }
 
     /**
