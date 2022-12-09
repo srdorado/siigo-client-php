@@ -39,13 +39,12 @@ class ClientCustomer extends AbstractClient
      * Create customer in siigo
      *
      * @param EntityInterface|null $entity
-     * @return string //Id de client siggo or ''
-     * @throws UrlRuleRequestException|BadRequest
+     * @return array //Id de client siggo or ''
+     * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null): string
+    public function create(EntityInterface $entity = null): array
     {
-        return $this->getBodyGenericWithKey(
-            'id',
+        return $this->getBodyGeneric(
             \Srdorado\SiigoClient\Enum\EndPoint\Customer::CREATE,
             $entity
         );
