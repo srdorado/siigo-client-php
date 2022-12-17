@@ -23,16 +23,16 @@ abstract class AbstractValidator
         $this->urlFactory = new \Srdorado\SiigoClient\Utils\UrlFactory();
     }
 
-    abstract public function validate(string $endPoint, EntityInterface $entity = null): void;
+    abstract public function validate($endPoint, EntityInterface $entity = null);
 
-    abstract public function getBody(string $endPoint, EntityInterface $entity): array;
+    abstract public function getBody($endPoint, EntityInterface $entity);
 
     /**
      * @param string $endPoint
      * @param EntityInterface|null $entity
      * @return string
      */
-    public function getUrl(string $endPoint, EntityInterface $entity = null): string
+    public function getUrl($endPoint, EntityInterface $entity = null)
     {
         return $this->urlFactory->getUrl($endPoint, $entity);
     }

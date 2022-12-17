@@ -10,26 +10,26 @@ use Srdorado\SiigoClient\Model\Validator\TokenValidator;
 
 class ClientToken extends AbstractClient
 {
-    private string $username;
+    private $username;
 
-    private string $accessKey;
+    private $accessKey;
 
-    private string $startDate;
+    private $startDate;
 
-    private string $endDate;
+    private $endDate;
 
-    private int $expirationTime;
+    private $expirationTime;
 
-    private string $tokenType;
+    private $tokenType;
 
-    private string $scope;
+    private $scope;
 
     /**
      * Construct
      *
      * @param string $baseUrl
      */
-    public function __construct(string $baseUrl = '')
+    public function __construct($baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
         $this->initGuzzleClient();
@@ -39,7 +39,7 @@ class ClientToken extends AbstractClient
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -47,7 +47,7 @@ class ClientToken extends AbstractClient
     /**
      * @param string $username
      */
-    public function setUsername(string $username): void
+    public function setUsername($username)
     {
         $this->username = $username;
     }
@@ -55,7 +55,7 @@ class ClientToken extends AbstractClient
     /**
      * @return string
      */
-    public function getAccessToken(): string
+    public function getAccessToken()
     {
         return $this->accessToken;
     }
@@ -63,7 +63,7 @@ class ClientToken extends AbstractClient
     /**
      * @param string $accessToken
      */
-    public function setAccessToken(string $accessToken): void
+    public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
     }
@@ -71,7 +71,7 @@ class ClientToken extends AbstractClient
     /**
      * @return string
      */
-    public function getStartDate(): string
+    public function getStartDate()
     {
         return $this->startDate;
     }
@@ -79,7 +79,7 @@ class ClientToken extends AbstractClient
     /**
      * @param string $startDate
      */
-    public function setStartDate(string $startDate): void
+    public function setStartDate($startDate)
     {
         $this->startDate = $startDate;
     }
@@ -87,7 +87,7 @@ class ClientToken extends AbstractClient
     /**
      * @return string
      */
-    public function getEndDate(): string
+    public function getEndDate()
     {
         return $this->endDate;
     }
@@ -95,7 +95,7 @@ class ClientToken extends AbstractClient
     /**
      * @param string $endDate
      */
-    public function setEndDate(string $endDate): void
+    public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
     }
@@ -103,7 +103,7 @@ class ClientToken extends AbstractClient
     /**
      * @return int
      */
-    public function getExpirationTime(): int
+    public function getExpirationTime()
     {
         return $this->expirationTime;
     }
@@ -111,7 +111,7 @@ class ClientToken extends AbstractClient
     /**
      * @param int $expirationTime
      */
-    public function setExpirationTime(int $expirationTime): void
+    public function setExpirationTime($expirationTime)
     {
         $this->expirationTime = $expirationTime;
     }
@@ -119,7 +119,7 @@ class ClientToken extends AbstractClient
     /**
      * @return string
      */
-    public function getTokenType(): string
+    public function getTokenType()
     {
         return $this->tokenType;
     }
@@ -127,7 +127,7 @@ class ClientToken extends AbstractClient
     /**
      * @param string $tokenType
      */
-    public function setTokenType(string $tokenType): void
+    public function setTokenType($tokenType)
     {
         $this->tokenType = $tokenType;
     }
@@ -135,7 +135,7 @@ class ClientToken extends AbstractClient
     /**
      * @return string
      */
-    public function getScope(): string
+    public function getScope()
     {
         return $this->scope;
     }
@@ -143,7 +143,7 @@ class ClientToken extends AbstractClient
     /**
      * @param string $scope
      */
-    public function setScope(string $scope): void
+    public function setScope($scope)
     {
         $this->scope = $scope;
     }
@@ -151,7 +151,7 @@ class ClientToken extends AbstractClient
     /**
      * @throws GuzzleException
      */
-    public function getToken(EntityInterface $entity = null): string
+    public function getToken($entity = null)
     {
         if (!$entity) {
             $data = [
@@ -183,10 +183,10 @@ class ClientToken extends AbstractClient
             throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
         }
 
-        return $this->accessToken ?? '';
+        return $this->accessToken ? $this->accessToken : '';
     }
 
-    public function getHeaders(array $params = []): array
+    public function getHeaders($params = [])
     {
         return \Srdorado\SiigoClient\Enum\EndPoint\Token::HEADER_POST;
     }

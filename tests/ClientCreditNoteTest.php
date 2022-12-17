@@ -71,7 +71,7 @@ class ClientCreditNoteTest extends TestCase
      * @return string
      * @throws \ReflectionException
      */
-    private function getToken(): string
+    private function getToken()
     {
         // Create client token
         $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
@@ -95,7 +95,7 @@ class ClientCreditNoteTest extends TestCase
     /**
      * @return array
      */
-    private function getJson(): array
+    private function getJson()
     {
         return [
             'document' => [

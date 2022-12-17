@@ -4,7 +4,7 @@ namespace Srdorado\SiigoClient\Factory;
 
 class RuleFactory extends AbstractFactory
 {
-    private const RULES = [
+    public const RULES = [
         'email' => \Srdorado\SiigoClient\Model\RuleValidator\RuleEmailValidator::class,
         'num_string' => \Srdorado\SiigoClient\Model\RuleValidator\RuleNumStringValidator::class,
         'long_string' => \Srdorado\SiigoClient\Model\RuleValidator\RuleLongStringValidator::class,
@@ -20,7 +20,7 @@ class RuleFactory extends AbstractFactory
         'date' => \Srdorado\SiigoClient\Model\RuleValidator\RuleDateValidator::class,
     ];
 
-    protected string $class;
+    protected $class;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class RuleFactory extends AbstractFactory
     /**
      * @throws \ReflectionException
      */
-    public function create(string $class = '', array $params = [])
+    public function create($class = '', $params = [])
     {
         $class = self::RULES[$class];
 

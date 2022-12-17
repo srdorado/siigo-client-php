@@ -13,7 +13,7 @@ class InvoiceValidator extends AbstractValidator
     /**
      * @throws UrlRuleRequestException
      */
-    public function validate(string $endPoint, EntityInterface $entity = null): void
+    public function validate($endPoint, EntityInterface $entity = null)
     {
         $dateEndpoints = [
             EndPoint::GET_BY_CREATED_START,
@@ -102,7 +102,7 @@ class InvoiceValidator extends AbstractValidator
      * @param EntityInterface $entity
      * @return array
      */
-    public function getBody(string $endPoint, EntityInterface $entity): array
+    public function getBody($endPoint, EntityInterface $entity)
     {
         $rules = [];
         if ($endPoint === EndPoint::CREATE || $endPoint === EndPoint::UPDATE) {

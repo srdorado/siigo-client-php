@@ -11,7 +11,7 @@ class ClientFactory extends AbstractFactory
     /**
      * @throws \ReflectionException
      */
-    public function create(string $class = '', array $params = [])
+    public function create($class = '', $params = [])
     {
         $class = new \ReflectionClass($class);
 

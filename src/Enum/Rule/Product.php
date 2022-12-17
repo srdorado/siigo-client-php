@@ -52,7 +52,7 @@ class Product
             'model' => Rule::SMALL_STRING
         ],
         'available_quantity' => Rule::INT,
-        'warehouses' => Rule::ARRAY
+        'warehouses' => Rule::_ARRAY
     ];
 
     public const GET_BY_ID_PARAMS = [

@@ -4,16 +4,16 @@ namespace Srdorado\SiigoClient\Model;
 
 class Entity implements EntityInterface
 {
-    private string $clientType;
+    private $clientType;
 
-    private string $requestType;
+    private $requestType;
 
-    private array $data;
+    private $data;
 
     /**
      * @param string $clientType
      */
-    public function __construct(string $clientType)
+    public function __construct($clientType)
     {
         $this->clientType = $clientType;
         $this->data = [];
@@ -22,7 +22,7 @@ class Entity implements EntityInterface
     /**
      * @return string
      */
-    public function getClientType(): string
+    public function getClientType()
     {
         return $this->clientType;
     }
@@ -30,7 +30,7 @@ class Entity implements EntityInterface
     /**
      * @param string $clientType
      */
-    public function setClientType(string $clientType): void
+    public function setClientType($clientType)
     {
         $this->clientType = $clientType;
     }
@@ -38,7 +38,7 @@ class Entity implements EntityInterface
     /**
      * @return array
      */
-    public function getData(): array
+    public function getData()
     {
         return $this->data;
     }
@@ -46,7 +46,7 @@ class Entity implements EntityInterface
     /**
      * @param array $data
      */
-    public function setData(array $data): void
+    public function setData($data)
     {
         $this->data = $data;
     }
@@ -56,7 +56,7 @@ class Entity implements EntityInterface
      * @param float|array|bool|int|string $value
      * @return void
      */
-    public function addKeyValue(string $key, $value): void
+    public function addKeyValue($key, $value)
     {
         $this->data[$key] = $value;
     }
@@ -68,7 +68,7 @@ class Entity implements EntityInterface
      * @param $value
      * @return array
      */
-    public function getAndRemove(string $key): array
+    public function getAndRemove($key)
     {
         $result = [];
         if (array_key_exists($key, $this->data)) {
@@ -81,7 +81,7 @@ class Entity implements EntityInterface
     /**
      * @return int
      */
-    public function countData(): int
+    public function countData()
     {
         return count($this->data);
     }
@@ -89,7 +89,7 @@ class Entity implements EntityInterface
     /**
      * @return string
      */
-    public function getRequestType(): string
+    public function getRequestType()
     {
         return $this->requestType;
     }
@@ -98,7 +98,7 @@ class Entity implements EntityInterface
      * @param string $requestType
      * @return void
      */
-    public function setRequestType(string $requestType): void
+    public function setRequestType($requestType)
     {
         $this->requestType = $requestType;
     }

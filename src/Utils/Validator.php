@@ -9,7 +9,7 @@ use Srdorado\SiigoClient\Model\Validator\AbstractValidator;
 
 class Validator
 {
-    private RuleFactory $ruleFactory;
+    private $ruleFactory;
 
     public function __construct()
     {
@@ -19,7 +19,7 @@ class Validator
     /**
      * @throws UrlRuleRequestException
      */
-    public function validate(string $type, EntityInterface $entity, array $rules, string $endPoint = ''): void
+    public function validate($type, EntityInterface $entity, $rules, $endPoint = '')
     {
         switch ($type) {
             case AbstractValidator::URL_REQUEST:
@@ -38,7 +38,7 @@ class Validator
     /**
      * @throws UrlRuleRequestException
      */
-    private function validateUrlRequest(string $endPoint, EntityInterface $entity, array $rules)
+    private function validateUrlRequest($endPoint, $entity, $rules)
     {
         $requireParams = substr_count($endPoint, '%s');
         $availableParams = $entity->countData();
@@ -52,8 +52,9 @@ class Validator
      * @param EntityInterface $entity
      * @param array $rules
      * @return void
+     * @throws \ReflectionException
      */
-    private function validateBodyRequest(EntityInterface $entity, array $rules)
+    private function validateBodyRequest($entity, $rules)
     {
         //TODO: add exception body
         $data = $entity->getData();
@@ -62,9 +63,9 @@ class Validator
     }
 
     /**
-     * @throws UrlRuleRequestException
+     * @throws UrlRuleRequestException|\ReflectionException
      */
-    private function validateUrlWithBodyRequest(string $endPoint, EntityInterface $entity, array $rules)
+    private function validateUrlWithBodyRequest($endPoint, $entity, $rules)
     {
         $entityClone = clone($entity);
 
@@ -91,7 +92,7 @@ class Validator
      * @return void
      * @throws \ReflectionException
      */
-    private function validateMatch(array $data, array $rules)
+    private function validateMatch($data, $rules)
     {
         foreach ($rules as $key => $rule) {
             if (strpos($key, '*') !== false) {
@@ -124,7 +125,7 @@ class Validator
     /**
      * @throws \ReflectionException
      */
-    private function validateArray(array $data, array $rule): void
+    private function validateArray($data, $rule)
     {
         if ($this->isArrayArray($rule)) {
             foreach ($data as $a) {
@@ -139,7 +140,7 @@ class Validator
      * @param array $array
      * @return bool
      */
-    private function isArrayArray(array $array): bool
+    private function isArrayArray($array)
     {
         $result = true;
         foreach ($array as $key => $value) {

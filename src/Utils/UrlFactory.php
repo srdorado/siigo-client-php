@@ -6,7 +6,7 @@ use Srdorado\SiigoClient\Model\EntityInterface;
 
 class UrlFactory
 {
-    public function getUrl(string $endPoint, EntityInterface $entity = null): string
+    public function getUrl($endPoint, $entity = null)
     {
         $url = $endPoint;
 

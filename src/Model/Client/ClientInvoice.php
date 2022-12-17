@@ -15,14 +15,14 @@ class ClientInvoice extends AbstractClient
      *
      * @param string $baseUrl
      */
-    public function __construct(string $baseUrl = '')
+    public function __construct($baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
         $this->initGuzzleClient();
         $this->validator = new InvoiceValidator();
     }
 
-    public function getHeaders(array $params = []): array
+    public function getHeaders($params = [])
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
@@ -36,7 +36,7 @@ class ClientInvoice extends AbstractClient
      * @return array
      * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null): array
+    public function create($entity = null)
     {
         return $this->getBodyGeneric(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::CREATE,
@@ -52,7 +52,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function update(EntityInterface $entity = null): array
+    public function update($entity = null)
     {
         $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::UPDATE . 'U', $entity);
@@ -80,7 +80,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getAll(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getAll($entity = null, $allResponse = false)
     {
         return $this->getListRequest(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_ALL, $entity, $allResponse);
     }
@@ -93,7 +93,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getById(EntityInterface $entity = null): array
+    public function getById($entity = null)
     {
         $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET . 'G', $entity);
@@ -119,7 +119,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function delete(EntityInterface $entity = null): bool
+    public function delete($entity = null)
     {
         $result = false;
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::DELETE . 'D', $entity);
@@ -145,7 +145,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function annul(EntityInterface $entity = null): bool
+    public function annul($entity = null)
     {
         $result = false;
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Invoice::ANNUL, $entity);
@@ -170,7 +170,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CREATED_START,
@@ -186,7 +186,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_UPDATED_START,
@@ -202,7 +202,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_DATE_START,
@@ -218,7 +218,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_DATE_END,
@@ -234,7 +234,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CREATED_END,
@@ -250,7 +250,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_UPDATED_END,
@@ -266,7 +266,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCustomerBranchOffice(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCustomerBranchOffice($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CUSTOMER_BRANCH_OFFICE,
@@ -282,7 +282,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByName(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByName($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_NAME,
@@ -298,7 +298,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCustomerIdentification(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCustomerIdentification($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_CUSTOMER_IDENTIFICATION,
@@ -314,7 +314,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDocumentId(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDocumentId($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::GET_BY_DOCUMENT_ID,
@@ -329,7 +329,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getPDF(EntityInterface $entity = null): array
+    public function getPDF($entity = null)
     {
         return $this->getUrlGenericList(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::PDF,
@@ -343,7 +343,7 @@ class ClientInvoice extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getStampErrors(EntityInterface $entity = null): array
+    public function getStampErrors($entity = null)
     {
         return $this->getUrlGenericList(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::STAMP_ERRORS,
@@ -355,7 +355,7 @@ class ClientInvoice extends AbstractClient
      * @param EntityInterface|null $entity
      * @return array
      */
-    public function sendEmailsCopy(EntityInterface $entity = null): array
+    public function sendEmailsCopy($entity = null)
     {
         //set token before send request
         $response = [];

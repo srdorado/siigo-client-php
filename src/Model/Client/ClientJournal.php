@@ -14,14 +14,14 @@ class ClientJournal extends AbstractClient
      *
      * @param string $baseUrl
      */
-    public function __construct(string $baseUrl = '')
+    public function __construct($baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
         $this->initGuzzleClient();
         $this->validator = new JournalValidator();
     }
 
-    public function getHeaders(array $params = []): array
+    public function getHeaders($params = [])
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
@@ -35,7 +35,7 @@ class ClientJournal extends AbstractClient
      * @return array
      * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null): array
+    public function create($entity = null)
     {
         $endpoint = \Srdorado\SiigoClient\Enum\EndPoint\Journal::CREATE;
         return $this->getBodyGeneric(
@@ -51,7 +51,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getAll(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getAll($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_ALL,
@@ -68,7 +68,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getById(EntityInterface $entity = null): array
+    public function getById($entity = null)
     {
         $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_ID, $entity);
@@ -93,7 +93,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_CREATED_START,
@@ -109,7 +109,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_UPDATED_START,
@@ -125,7 +125,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_DATE_START,
@@ -141,7 +141,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_DATE_END,
@@ -157,7 +157,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_CREATED_END,
@@ -173,7 +173,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_UPDATED_END,
@@ -189,7 +189,7 @@ class ClientJournal extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDocumentId(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDocumentId($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Journal::GET_BY_DOCUMENT_ID,

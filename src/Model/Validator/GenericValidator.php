@@ -9,7 +9,7 @@ use Srdorado\SiigoClient\Enum\EndPoint\Generic as EndPoint;
 
 class GenericValidator extends AbstractValidator
 {
-    public function validate(string $endPoint, EntityInterface $entity = null): void
+    public function validate($endPoint, EntityInterface $entity = null)
     {
         switch ($endPoint) {
             case EndPoint::GET_FIXED_ASSETS:
@@ -54,7 +54,7 @@ class GenericValidator extends AbstractValidator
         }
     }
 
-    public function getBody(string $endPoint, EntityInterface $entity): array
+    public function getBody($endPoint, EntityInterface $entity)
     {
         // TODO: Implement getBody() method.
         return $this->bodyFactory->getBody($entity, []);

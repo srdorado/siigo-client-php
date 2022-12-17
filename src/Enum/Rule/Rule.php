@@ -13,7 +13,7 @@ class Rule
     public const INT = 'int';
     public const BOOL = 'bool';
     public const OPTIONAL = 'optional';
-    public const ARRAY = 'array';
+    public const _ARRAY = 'array';
     public const DATE = 'date';
     public const MAX_LENGTH = 'max_length';
     public const MIN_LENGTH = 'min_length';

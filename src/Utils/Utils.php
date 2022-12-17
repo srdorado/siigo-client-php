@@ -10,7 +10,7 @@ class Utils
      * @param string $name
      * @return bool
      */
-    public static function isNameValid(string $name): bool
+    public static function isNameValid($name)
     {
         $result = true;
         if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
@@ -25,7 +25,7 @@ class Utils
      * @param string $email
      * @return bool
      */
-    public static function isEmailValid(string $email): bool
+    public static function isEmailValid($email)
     {
         $result = true;
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -45,7 +45,7 @@ class Utils
      *
      * @return string
      */
-    public static function replaceFirst(string $txt, string $origen, string $destino): string
+    public static function replaceFirst($txt, $origen, $destino)
     {
         $origen = '/' . preg_quote('' . $origen, '/') . '/i';
         return '' . preg_replace($origen, '' . $destino, '' . $txt, 1);
@@ -58,7 +58,7 @@ class Utils
      * @param string $date
      * @return bool
      */
-    public static function isDateValid(string $format, string $date): bool
+    public static function isDateValid($format, $date)
     {
         $result = false;
         if (date($format, strtotime($date)) == $date) {

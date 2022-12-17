@@ -59,7 +59,7 @@ class Invoice
                 'due_date' => Rule::DATE
             ]
         ],
-        '*additional_fields' => Rule::ARRAY
+        '*additional_fields' => Rule::_ARRAY
     ];
 
     public const ID_PARAMS = [

@@ -125,7 +125,7 @@ class ClientInvoiceTest extends TestCase
     /**
      * @return array
      */
-    private function getJsonWithoutCustomer(): array
+    private function getJsonWithoutCustomer()
     {
         return [
             'document' => [
@@ -181,7 +181,7 @@ class ClientInvoiceTest extends TestCase
     /**
      * @return array
      */
-    private function getJsonWitCustomer(): array
+    private function getJsonWitCustomer()
     {
         return [
             'document' => [

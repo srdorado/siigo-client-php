@@ -10,7 +10,7 @@ class ClientVoucherFactory extends AbstractFactory
     {
     }
 
-    public function create(string $class = '', array $params = [])
+    public function create($class = '', $params = [])
     {
         return new \Srdorado\SiigoClient\Model\Client\ClientVoucher();
     }

@@ -14,14 +14,14 @@ class ClientCreditNote extends AbstractClient
      *
      * @param string $baseUrl
      */
-    public function __construct(string $baseUrl = '')
+    public function __construct($baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
         $this->initGuzzleClient();
         $this->validator = new CreditNoteValidator();
     }
 
-    public function getHeaders(array $params = []): array
+    public function getHeaders($params = [])
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
@@ -35,7 +35,7 @@ class ClientCreditNote extends AbstractClient
      * @return array
      * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null): array
+    public function create($entity = null)
     {
         return $this->getBodyGeneric(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::CREATE,
@@ -50,7 +50,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getAll(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getAll($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_ALL,
@@ -67,7 +67,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getById(EntityInterface $entity = null): array
+    public function getById($entity = null)
     {
         $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_ID, $entity);
@@ -92,7 +92,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_CREATED_START,
@@ -108,7 +108,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_UPDATED_START,
@@ -124,7 +124,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_DATE_START,
@@ -140,7 +140,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_DATE_END,
@@ -156,7 +156,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_CREATED_END,
@@ -172,7 +172,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_UPDATED_END,
@@ -188,7 +188,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCustomerBranchOffice(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCustomerBranchOffice($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_CUSTOMER_BRANCH_OFFICE,
@@ -204,7 +204,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCustomerIdentification(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCustomerIdentification($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_CUSTOMER_IDENTIFICATION,
@@ -220,7 +220,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDocumentId(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDocumentId($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_DOCUMENT_ID,
@@ -235,7 +235,7 @@ class ClientCreditNote extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getPDF(EntityInterface $entity = null): array
+    public function getPDF($entity = null)
     {
         return $this->getUrlGenericList(
             \Srdorado\SiigoClient\Enum\EndPoint\CreditNote::PDF,
