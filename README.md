@@ -31,8 +31,67 @@ composer require srdorado/siigo-client-php
 ```
 
 ## How to use it?
+
+* Get token
+
 ```php
-//TODO: exomaple code
+    function getToken()
+    {
+        // Create client token
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientTokenFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::TOKEN);
+        $clientToken = $clientTokenFactory->create();
+        $clientToken->setBaseUrl('https://api.siigo.com/');
+
+        // Create entity token
+        $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::TOKEN);
+        $entity->setData(
+            [
+                'username' => '',
+                'access_key' => ''
+            ]
+        );
+
+        // Request token
+        return $clientToken->getToken($entity);
+    }
+```
+
+* Create product
+
+```php
+    function getCustomClient()
+    {
+        // generate token
+        $token = $this->getToken();
+
+        // Create client
+        $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
+        $clientProductFactory = $clientFactory->create(\Srdorado\SiigoClient\Enum\ClientType::PRODUCT);
+        $clientProduct = $clientProductFactory->create();
+        $clientProduct->setBaseUrl('https://api.siigo.com/');
+        $clientProduct->setAccessKey($token);
+
+
+        return $clientProduct;
+    }
+
+
+
+    function create()
+    {
+        $clientProduct = $this->getCustomClient();
+
+        $entity = new \Srdorado\SiigoClient\Model\Entity(\Srdorado\SiigoClient\Enum\ClientType::PRODUCT);
+
+        $dataEntity = $this->getExampleCompleteProduct();
+
+        $entity->setData($dataEntity);
+
+        $productId = $clientProduct->create($entity);
+
+        $this->assertTrue(true);
+    }
 ```
 
 ## Versioning

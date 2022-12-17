@@ -137,7 +137,7 @@ class ClientCustomerTest extends TestCase
      * @return string
      * @throws \ReflectionException
      */
-    private function getToken(): string
+    private function getToken()
     {
         // Create client token
         $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
@@ -163,7 +163,7 @@ class ClientCustomerTest extends TestCase
      *
      * @return array
      */
-    private function getExampleBasicClient(): array
+    private function getExampleBasicClient()
     {
         return [
             'person_type' => 'Person',
@@ -206,7 +206,7 @@ class ClientCustomerTest extends TestCase
      *
      * @return array
      */
-    private function getExampleCompleteClient(): array
+    private function getExampleCompleteClient()
     {
         return [
             'type' => 'Customer',

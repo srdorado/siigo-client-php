@@ -14,14 +14,14 @@ class ClientVoucher extends AbstractClient
      *
      * @param string $baseUrl
      */
-    public function __construct(string $baseUrl = '')
+    public function __construct($baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
         $this->initGuzzleClient();
         $this->validator = new VoucherValidator();
     }
 
-    public function getHeaders(array $params = []): array
+    public function getHeaders($params = [])
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
@@ -36,7 +36,7 @@ class ClientVoucher extends AbstractClient
      * @return array
      * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null, bool $advanced = false): array
+    public function create($entity = null, $advanced = false)
     {
         $endpoint = $advanced ?
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::CREATE_ADVANCED :
@@ -54,7 +54,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getAll(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getAll($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_ALL,
@@ -71,7 +71,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getById(EntityInterface $entity = null): array
+    public function getById($entity = null)
     {
         $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_ID, $entity);
@@ -96,7 +96,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_CREATED_START,
@@ -112,7 +112,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_UPDATED_START,
@@ -128,7 +128,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_DATE_START,
@@ -144,7 +144,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDateEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDateEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_DATE_END,
@@ -160,7 +160,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_CREATED_END,
@@ -176,7 +176,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_UPDATED_END,
@@ -192,7 +192,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCustomerBranchOffice(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCustomerBranchOffice($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_CUSTOMER_BRANCH_OFFICE,
@@ -208,7 +208,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCustomerIdentification(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCustomerIdentification($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_CUSTOMER_IDENTIFICATION,
@@ -224,7 +224,7 @@ class ClientVoucher extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByDocumentId(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByDocumentId($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Voucher::GET_BY_DOCUMENT_ID,

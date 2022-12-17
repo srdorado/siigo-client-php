@@ -11,7 +11,7 @@ class BodyFactory
      * @param array $rules
      * @return array
      */
-    public function getBody(EntityInterface $entity, array $rules): array
+    public function getBody($entity, $rules)
     {
         return $this->merge($rules, $entity->getData(), []);
     }
@@ -21,7 +21,7 @@ class BodyFactory
      * @param array $data
      * @return array
      */
-    private function merge(array $rules, array $data): array
+    private function merge($rules, $data)
     {
         $body = [];
 

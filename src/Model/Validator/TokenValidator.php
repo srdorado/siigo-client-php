@@ -12,7 +12,7 @@ class TokenValidator extends AbstractValidator
     /**
      * @throws UrlRuleRequestException
      */
-    public function validate(string $endPoint, EntityInterface $entity = null): void
+    public function validate($endPoint, EntityInterface $entity = null)
     {
         if (\Srdorado\SiigoClient\Enum\EndPoint\Token::AUTH !== $endPoint) {
             $message = ' endpoint does not exist.';
@@ -27,7 +27,7 @@ class TokenValidator extends AbstractValidator
      * @param EntityInterface $entity
      * @return array
      */
-    public function getBody(string $endPoint, EntityInterface $entity): array
+    public function getBody($endPoint, EntityInterface $entity)
     {
         $rules = [];
 

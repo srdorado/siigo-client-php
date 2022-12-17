@@ -204,7 +204,7 @@ class ClientProductTest extends TestCase
      * @return string
      * @throws \ReflectionException
      */
-    private function getToken(): string
+    private function getToken()
     {
         // Create client token
         $clientFactory = new \Srdorado\SiigoClient\Factory\ClientFactory();
@@ -230,7 +230,7 @@ class ClientProductTest extends TestCase
      *
      * @return array
      */
-    private function getExampleBasicProduct(): array
+    private function getExampleBasicProduct()
     {
         return [
             'code' => 'Code-20001',
@@ -244,10 +244,10 @@ class ClientProductTest extends TestCase
      *
      * @return array
      */
-    private function getExampleCompleteProduct(): array
+    private function getExampleCompleteProduct()
     {
         return [
-            'code' => 'Code-20004',
+            'code' => 'Code-20009999',
             'name' => 'Camiseta de algodón 20004',
             'account_group' => 1253,
             'type' => 'Product',

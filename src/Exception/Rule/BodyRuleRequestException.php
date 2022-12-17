@@ -3,11 +3,10 @@
 namespace Srdorado\SiigoClient\Exception\Rule;
 
 use Srdorado\SiigoClient\Exception\SiigoException;
-use Throwable;
 
 class BodyRuleRequestException extends SiigoException
 {
-    public function __construct($message = '', $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, $previous = null)
     {
         $defaultMessage =  ' malformed ruler or invalid paramaterals. ';
         $defaultMessage = $this->headMessage . $defaultMessage;

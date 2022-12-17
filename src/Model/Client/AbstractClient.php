@@ -11,13 +11,13 @@ use Spatie\GuzzleRateLimiterMiddleware\RateLimiterMiddleware;
 
 abstract class AbstractClient
 {
-    protected string $baseUrl;
+    protected $baseUrl;
 
-    protected \GuzzleHttp\Client $client;
+    protected $client;
 
-    protected AbstractValidator $validator;
+    protected $validator;
 
-    protected string $accessToken;
+    protected $accessToken;
 
 
     /**
@@ -25,7 +25,7 @@ abstract class AbstractClient
      *
      * @return void
      */
-    protected function initGuzzleClient(): void
+    protected function initGuzzleClient()
     {
         $stack = HandlerStack::create();
         $stack->push(RateLimiterMiddleware::perMinute(100));
@@ -40,7 +40,7 @@ abstract class AbstractClient
     /**
      * @return string
      */
-    public function getBaseUrl(): string
+    public function getBaseUrl()
     {
         return $this->baseUrl;
     }
@@ -48,7 +48,7 @@ abstract class AbstractClient
     /**
      * @param string $baseUrl
      */
-    public function setBaseUrl(string $baseUrl): void
+    public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = $baseUrl;
     }
@@ -56,7 +56,7 @@ abstract class AbstractClient
     /**
      * @return \GuzzleHttp\Client
      */
-    public function getClient(): \GuzzleHttp\Client
+    public function getClient()
     {
         return $this->client;
     }
@@ -64,7 +64,7 @@ abstract class AbstractClient
     /**
      * @param \GuzzleHttp\Client $client
      */
-    public function setClient(\GuzzleHttp\Client $client): void
+    public function setClient($client)
     {
         $this->client = $client;
     }
@@ -72,7 +72,7 @@ abstract class AbstractClient
     /**
      * @return string
      */
-    public function getAccessKey(): string
+    public function getAccessKey()
     {
         return $this->accessToken;
     }
@@ -80,7 +80,7 @@ abstract class AbstractClient
     /**
      * @param string $accessKey
      */
-    public function setAccessKey(string $accessKey): void
+    public function setAccessKey($accessKey)
     {
         $this->accessToken = $accessKey;
     }
@@ -89,15 +89,15 @@ abstract class AbstractClient
      * @param string $endPoint
      * @return string
      */
-    public function getRequestUrl(string $endPoint): string
+    public function getRequestUrl($endPoint)
     {
         return $this->baseUrl . $endPoint;
     }
 
     /**
-     * @return void
+     * @return array
      */
-    protected function post(string $urlRequest, array $headers, string  $body): array
+    protected function post($urlRequest, $headers, $body)
     {
         $request = new \GuzzleHttp\Psr7\Request('POST', $urlRequest, $headers, $body);
         $result = $this->client->sendAsync($request)->wait();
@@ -107,7 +107,7 @@ abstract class AbstractClient
         ];
     }
 
-    protected function get(string $urlRequest, array $headers, string  $body = ''): array
+    protected function get($urlRequest, $headers, $body = '')
     {
         $request = new \GuzzleHttp\Psr7\Request('GET', $urlRequest, $headers, $body);
         $result = $this->client->sendAsync($request)->wait();
@@ -123,7 +123,7 @@ abstract class AbstractClient
      * @param string $body
      * @return array
      */
-    protected function put(string $urlRequest, array $headers, string $body = ''): array
+    protected function put($urlRequest, $headers, $body = '')
     {
         $request = new \GuzzleHttp\Psr7\Request('PUT', $urlRequest, $headers, $body);
         $result = $this->client->sendAsync($request)->wait();
@@ -139,7 +139,7 @@ abstract class AbstractClient
      * @param string $body
      * @return array
      */
-    protected function del(string $urlRequest, array $headers, string $body = ''): array
+    protected function del($urlRequest, $headers, $body = '')
     {
         $request = new \GuzzleHttp\Psr7\Request('DELETE', $urlRequest, $headers, $body);
         $result = $this->client->sendAsync($request)->wait();
@@ -157,7 +157,7 @@ abstract class AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getListRequest(string $endPoint, EntityInterface $entity = null, bool $allResponse = false): array
+    public function getListRequest($endPoint, $entity = null, $allResponse = false)
     {
         $result = [];
         if ($allResponse) {
@@ -175,7 +175,7 @@ abstract class AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException|\Srdorado\SiigoClient\Exception\Rule\BadRequest
      */
-    protected function getUrlGenericList(string $endPoint, EntityInterface $entity = null): array
+    protected function getUrlGenericList($endPoint, EntityInterface $entity = null)
     {
         $result = [];
         $this->validator->validate($endPoint, $entity);
@@ -199,7 +199,7 @@ abstract class AbstractClient
      * @return array
      * @throws BadRequest
      */
-    protected function getUrlGenericListWithKey(string $key, string $endPoint, EntityInterface $entity = null): array
+    protected function getUrlGenericListWithKey($key, $endPoint, $entity = null)
     {
         $response = [];
         $this->validator->validate($endPoint, $entity);
@@ -224,7 +224,7 @@ abstract class AbstractClient
      * @return string
      * @throws BadRequest
      */
-    protected function getUrlGenericWithKey(string $key, string $endPoint, EntityInterface $entity = null): string
+    protected function getUrlGenericWithKey($key, $endPoint, $entity = null)
     {
         $response = '';
         $this->validator->validate($endPoint, $entity);
@@ -249,7 +249,7 @@ abstract class AbstractClient
      * @return string
      * @throws BadRequest
      */
-    protected function getBodyGenericWithKey(string $key, string $endPoint, EntityInterface $entity = null): string
+    protected function getBodyGenericWithKey($key, $endPoint, $entity = null)
     {
         $response = [];
         $this->validator->validate($endPoint, $entity);
@@ -273,7 +273,7 @@ abstract class AbstractClient
      * @return array
      * @throws BadRequest
      */
-    protected function getBodyGeneric(string $endPoint, EntityInterface $entity = null): array
+    protected function getBodyGeneric($endPoint, $entity = null)
     {
         $response = [];
         $this->validator->validate($endPoint, $entity);
@@ -295,5 +295,5 @@ abstract class AbstractClient
      * @param array $params
      * @return array
      */
-    abstract public function getHeaders(array $params = []): array;
+    abstract public function getHeaders($params = []);
 }

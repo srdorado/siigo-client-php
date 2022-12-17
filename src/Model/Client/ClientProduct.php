@@ -15,7 +15,7 @@ class ClientProduct extends AbstractClient
      *
      * @param string $baseUrl
      */
-    public function __construct(string $baseUrl = '')
+    public function __construct($baseUrl = '')
     {
         $this->baseUrl = $baseUrl;
         $this->initGuzzleClient();
@@ -26,7 +26,7 @@ class ClientProduct extends AbstractClient
      * @param array $params
      * @return array
      */
-    public function getHeaders(array $params = []): array
+    public function getHeaders($params = [])
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
@@ -40,7 +40,7 @@ class ClientProduct extends AbstractClient
      * @return array
      * @throws BadRequest
      */
-    public function create(EntityInterface $entity = null): array
+    public function create($entity = null)
     {
         return $this->getBodyGeneric(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::CREATE,
@@ -55,7 +55,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getAll(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getAll($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::GET_ALL,
@@ -71,7 +71,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_CREATED_START,
@@ -87,7 +87,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedStart(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedStart($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_UPDATED_START,
@@ -103,7 +103,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCreatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByCreatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_CREATED_END,
@@ -119,7 +119,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByUpdatedEnd(EntityInterface $entity = null, bool $allResponse = false): array
+    public function getByUpdatedEnd($entity = null, $allResponse = false)
     {
         return $this->getListRequest(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_UPDATED_END,
@@ -136,7 +136,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getById(EntityInterface $entity = null): array
+    public function getById($entity = null)
     {
         return $this->getUrlGenericList(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_ID,
@@ -152,7 +152,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function getByCode(EntityInterface $entity = null): array
+    public function getByCode($entity = null)
     {
         $product = [];
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Product::GET_BY_CODE, $entity);
@@ -181,7 +181,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function update(EntityInterface $entity = null): array
+    public function update($entity = null)
     {
         //set token before send request
         $response = '';
@@ -211,7 +211,7 @@ class ClientProduct extends AbstractClient
      * @throws BadRequest
      * @throws UrlRuleRequestException
      */
-    public function delete(EntityInterface $entity = null): bool
+    public function delete($entity = null)
     {
         $result = false;
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Product::DELETE . 'D', $entity);
@@ -235,7 +235,7 @@ class ClientProduct extends AbstractClient
      * @return array
      * @throws BadRequest|UrlRuleRequestException
      */
-    public function getAccountGroups(): array
+    public function getAccountGroups()
     {
         return $this->getUrlGenericList(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::ACCOUNT_GROUPS
@@ -248,7 +248,7 @@ class ClientProduct extends AbstractClient
      * @return array
      * @throws BadRequest|UrlRuleRequestException
      */
-    public function getWareHouses(): array
+    public function getWareHouses()
     {
         return $this->getUrlGenericList(
             \Srdorado\SiigoClient\Enum\EndPoint\Product::WAREHOUSES
