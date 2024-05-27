@@ -32,6 +32,7 @@ class ClientCustomer extends AbstractClient
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
+        $headers['Partner-Id'] = $params['scope'];
         return $headers;
     }
 
@@ -177,7 +178,12 @@ class ClientCustomer extends AbstractClient
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Customer::UPDATE . 'U', $entity);
         $id = $entity->getAndRemove(AbstractValidator::URL_REQUEST);
         $body = $this->validator->getBody(\Srdorado\SiigoClient\Enum\EndPoint\Customer::UPDATE, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $entity->setData($id[AbstractValidator::URL_REQUEST]);
         $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Customer::UPDATE, $entity);
         $urlRequest = $this->getRequestUrl($url);
@@ -204,7 +210,12 @@ class ClientCustomer extends AbstractClient
     {
         $result = false;
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\Customer::DELETE . 'D', $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\Customer::DELETE, $entity);
         $urlRequest = $this->getRequestUrl($url);
         $result = $this->del($urlRequest, $headers);
