@@ -25,6 +25,7 @@ class ClientCreditNote extends AbstractClient
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
+        $headers['Partner-Id'] = $params['scope'];
         return $headers;
     }
 
@@ -71,7 +72,12 @@ class ClientCreditNote extends AbstractClient
     {
         $response = '';
         $this->validator->validate(\Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_ID, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $url = $this->validator->getUrl(\Srdorado\SiigoClient\Enum\EndPoint\CreditNote::GET_BY_ID, $entity);
         $urlRequest = $this->getRequestUrl($url);
         $result = $this->get($urlRequest, $headers);

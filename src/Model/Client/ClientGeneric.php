@@ -30,6 +30,7 @@ class ClientGeneric extends AbstractClient
     {
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
+        $headers['Partner-Id'] = $params['scope'];
         return $headers;
     }
 

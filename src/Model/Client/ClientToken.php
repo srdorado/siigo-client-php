@@ -22,8 +22,6 @@ class ClientToken extends AbstractClient
 
     private $tokenType;
 
-    private $scope;
-
     /**
      * Construct
      *
@@ -55,17 +53,17 @@ class ClientToken extends AbstractClient
     /**
      * @return string
      */
-    public function getAccessToken()
+    public function getAccessKey()
     {
-        return $this->accessToken;
+        return $this->accessKey;
     }
 
     /**
-     * @param string $accessToken
+     * @param $accessKey
      */
-    public function setAccessToken($accessToken)
+    public function setAccessKey($accessKey)
     {
-        $this->accessToken = $accessToken;
+        $this->accessKey = $accessKey;
     }
 
     /**
@@ -133,30 +131,14 @@ class ClientToken extends AbstractClient
     }
 
     /**
-     * @return string
-     */
-    public function getScope()
-    {
-        return $this->scope;
-    }
-
-    /**
-     * @param string $scope
-     */
-    public function setScope($scope)
-    {
-        $this->scope = $scope;
-    }
-
-    /**
      * @throws GuzzleException
      */
     public function getToken($entity = null)
     {
         if (!$entity) {
             $data = [
-                'username' => $this->username,
-                'access_key' => $this->accessKey
+                'username' => $this->username ?? '',
+                'access_key' => $this->accessKey ?? ''
             ];
             $entity = new Entity(ClientType::TOKEN);
             $entity->setData($data);

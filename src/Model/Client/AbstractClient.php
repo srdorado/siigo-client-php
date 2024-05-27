@@ -5,7 +5,6 @@ namespace Srdorado\SiigoClient\Model\Client;
 use Srdorado\SiigoClient\Exception\Rule\BadRequest;
 use Srdorado\SiigoClient\Exception\Rule\UrlRuleRequestException;
 use Srdorado\SiigoClient\Model\EntityInterface;
-use Srdorado\SiigoClient\Model\Validator\AbstractValidator;
 use GuzzleHttp\HandlerStack;
 use Spatie\GuzzleRateLimiterMiddleware\RateLimiterMiddleware;
 
@@ -19,6 +18,7 @@ abstract class AbstractClient
 
     protected $accessToken;
 
+    protected $scope;
 
     /**
      * Init GuzzleClient and set limit request per minute
@@ -72,17 +72,37 @@ abstract class AbstractClient
     /**
      * @return string
      */
-    public function getAccessKey()
+    public function getAccessToken()
     {
         return $this->accessToken;
     }
 
     /**
-     * @param string $accessKey
+     * @param $accessToken
      */
-    public function setAccessKey($accessKey)
+    public function setAccessToken($accessToken)
     {
-        $this->accessToken = $accessKey;
+        $this->accessToken = $accessToken;
+    }
+
+    /**
+     * Get scope
+     *
+     * @return string
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
+     * Set scope
+     *
+     * @param string $scope
+     */
+    public function setScope($scope)
+    {
+        $this->scope = $scope;
     }
 
     /**
@@ -179,7 +199,12 @@ abstract class AbstractClient
     {
         $result = [];
         $this->validator->validate($endPoint, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $url = $this->validator->getUrl($endPoint, $entity);
         $urlRequest = $this->getRequestUrl($url);
         $result = $this->get($urlRequest, $headers);
@@ -203,7 +228,12 @@ abstract class AbstractClient
     {
         $response = [];
         $this->validator->validate($endPoint, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $url = $this->validator->getUrl($endPoint, $entity);
         $urlRequest = $this->getRequestUrl($url);
         $result = $this->get($urlRequest, $headers);
@@ -228,7 +258,12 @@ abstract class AbstractClient
     {
         $response = '';
         $this->validator->validate($endPoint, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $url = $this->validator->getUrl($endPoint, $entity);
         $urlRequest = $this->getRequestUrl($url);
         $result = $this->get($urlRequest, $headers);
@@ -253,7 +288,12 @@ abstract class AbstractClient
     {
         $response = [];
         $this->validator->validate($endPoint, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $body = $this->validator->getBody($endPoint, $entity);
         $urlRequest = $this->getRequestUrl($endPoint);
         $result = $this->post($urlRequest, $headers, json_encode($body));
@@ -277,7 +317,12 @@ abstract class AbstractClient
     {
         $response = [];
         $this->validator->validate($endPoint, $entity);
-        $headers = $this->getHeaders(['access_token' => $this->accessToken]);
+        $headers = $this->getHeaders(
+            [
+                'access_token' => $this->accessToken,
+                'scope' => $this->scope
+            ]
+        );
         $body = $this->validator->getBody($endPoint, $entity);
         $urlRequest = $this->getRequestUrl($endPoint);
         $result = $this->post($urlRequest, $headers, json_encode($body));
