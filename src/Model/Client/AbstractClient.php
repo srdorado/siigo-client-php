@@ -33,6 +33,9 @@ abstract class AbstractClient
         $this->client = new \GuzzleHttp\Client(
             [
                 'handler' => $stack,
+                'curl' => [
+                    CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2
+                ]
             ]
         );
     }
