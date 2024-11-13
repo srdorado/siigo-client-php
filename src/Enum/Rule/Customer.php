@@ -14,7 +14,7 @@ class Customer
             '1' => Rule::SMALL_STRING . '|' . Rule::MAX_LENGTH . ':30'
         ],
         'address' => [
-            'address' => Rule::SMALL_STRING  . '|' . Rule::MAX_LENGTH . ':50',
+            'address' => Rule::STRING,
             'city' => [
                 'country_code' => Rule::SMALL_STRING  . '|' . Rule::MAX_LENGTH . ':3',
                 'state_code' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':30',
@@ -62,7 +62,7 @@ class Customer
             ]
         ],
         'address' => [
-            'address' => Rule::SMALL_STRING  . '|' . Rule::MAX_LENGTH . ':50',
+            'address' => Rule::STRING,
             'city' => [
                 'country_code' => Rule::SMALL_STRING  . '|' . Rule::MAX_LENGTH . ':3',
                 'state_code' => Rule::NUM_STRING  . '|' . Rule::MAX_LENGTH . ':30',
