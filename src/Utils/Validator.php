@@ -95,30 +95,35 @@ class Validator
     private function validateMatch($data, $rules)
     {
         foreach ($rules as $key => $rule) {
-            if (strpos($key, '*') !== false) {
-                $tam = strlen($key);
-                $key = substr($key, 1, $tam);
-                if (!array_key_exists($key, $data)) {
+            try {
+                if (strpos($key, '*') !== false) {
+                    $tam = strlen($key);
+                    $key = substr($key, 1, $tam);
+                    if (!array_key_exists($key, $data)) {
+                        continue;
+                    }
+                }
+
+                $keyData = $key;
+
+                if (is_numeric($key)) {
+                    $keyData = intval($key);
+                }
+
+                if (is_array($rule)) {
+                    $this->validateArray($data[$keyData], $rule);
                     continue;
                 }
+
+                $value = $data[$keyData];
+
+                $customRules = explode('|', $rule);
+
+                $this->validateCustomRules($customRules, $value);
+            } catch (\Exception $e) {
+                $message = $key . ' - ' . $e->getMessage();
+                throw new \Srdorado\SiigoClient\Exception\Rule\BodyRuleRequestException($message);
             }
-
-            $keyData = $key;
-
-            if (is_numeric($key)) {
-                $keyData = intval($key);
-            }
-
-            if (is_array($rule)) {
-                $this->validateArray($data[$keyData], $rule);
-                continue;
-            }
-
-            $value = $data[$keyData];
-
-            $customRules = explode('|', $rule);
-
-            $this->validateCustomRules($customRules, $value);
         }
     }
 
