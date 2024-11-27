@@ -10,6 +10,8 @@ use Srdorado\SiigoClient\Model\Validator\InvoiceValidator;
 
 class ClientInvoice extends AbstractClient
 {
+    protected $idempotency = null;
+
     /**
      * Construct
      *
@@ -27,7 +29,38 @@ class ClientInvoice extends AbstractClient
         $headers = \Srdorado\SiigoClient\Enum\EndPoint\Customer::HEADER_POST;
         $headers['Authorization'] = $params['access_token'];
         $headers['Partner-Id'] = $params['scope'];
+        if (array_key_exists('idempotency_key', $params)) {
+            $headers['Idempotency-Key'] = $params['idempotency_key'];
+        }
         return $headers;
+    }
+
+    /**
+     * @inheritdoc
+     * @throws UrlRuleRequestException
+     */
+    protected function getBodyGeneric($endPoint, $entity = null)
+    {
+        $this->validator->validate($endPoint, $entity);
+        $headersData =  [
+            'access_token' => $this->accessToken,
+            'scope' => $this->scope
+        ];
+        if ($this->idempotency) {
+            $headersData['idempotency_key'] = $this->idempotency;
+        }
+        $headers = $this->getHeaders($headersData);
+        $body = $this->validator->getBody($endPoint, $entity);
+        $urlRequest = $this->getRequestUrl($endPoint);
+        $result = $this->post($urlRequest, $headers, json_encode($body));
+        if ($result['code'] === 201) {
+            $result = json_decode($result['contents'], true);
+            $response = $result;
+        } else {
+            $message =  'response - ' . $result['contents'];
+            throw new \Srdorado\SiigoClient\Exception\Rule\BadRequest($message);
+        }
+        return $response;
     }
 
     /**
@@ -35,10 +68,11 @@ class ClientInvoice extends AbstractClient
      *
      * @param EntityInterface|null $entity
      * @return array
-     * @throws BadRequest
+     * @throws BadRequest|UrlRuleRequestException
      */
-    public function create($entity = null)
+    public function create($entity = null, $idempotency = null)
     {
+        $this->idempotency = $idempotency;
         return $this->getBodyGeneric(
             \Srdorado\SiigoClient\Enum\EndPoint\Invoice::CREATE,
             $entity
